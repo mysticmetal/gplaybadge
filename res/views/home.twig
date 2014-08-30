@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>GPlay.ws</title>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css">
+    <link href="//fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet" type="text/css">
+    <link href="{{ app.request.basepath }}/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>
+                <img src="{{ app.request.basepath }}/logo.png"
+                     class="img-response hidden">
+                <br>
+                GPlay.ws
+                <small><br>Android apps badge galore</small>
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6  col-md-offset-3">
+            <p>Easily create a badge to promote your own android application in a single step.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>Input your app's package id in the form below and click <em>Build my badge</em>, then paste the code
+                wherever you like.</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form id="createBadgeForm" class="form-inline">
+                <div class="form-group col-md-6 col-md-offset-3" id="createBadgeFormGroup">
+                    <input class="form-control" placeholder="Application package id" id="packageIdInput">
+                    <button type="submit" class="btn btn-primary" id="buildButton">Build my badge!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row text-center" id="badgeDiv">
+        <div class="col-md-12">
+            <img id="badgeImg" style="display: none">
+        </div>
+    </div>
+
+    <div class="row hidden">
+        <div class="col-md-4 col-md-offset-4">
+
+            Copy and paste this HTML into your web site:
+            <div class="input-group">
+                <input onclick="this.select();" type="text" class="form-control" value="html">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Copy</button>
+                </span>
+            </div>
+
+            Copy and paste this BBCode into a forum:
+            <div class="input-group">
+                <input onclick="this.select();" type="text" class="form-control" value="bbcode">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Copy</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="helpModalLabel"><span class="glyphicon glyphicon-question-sign"></span> Help</h3>
+            </div>
+            <div class="modal-body">
+                <h4>How to get an application package id</h4>
+                <p>To create a badge, you need to know the app's fully qualified <em>package id</em>, which is
+                    declared
+                    in the app's <a
+                            href="http://developer.android.com/guide/topics/manifest/manifest-element.html#package">manifest
+                        file</a>, the <a href="https://play.google.com/apps/publish">Developer Console</a>
+                    and in the app page on the <a href="https://play.google.com/store/apps">Google Play Store</a>.</p>
+
+                Please nothe that in the Play Store URL the package id is the part after "id=" till the end of URL or
+                before "&". E.g. the URL of Muzei Webcam on the Google Play Store is
+                https://play.google.com/store/apps/details?id=net.luxteam.muzeiwebcam&hl=en and its package id is thus
+                <em>net.luxteam.muzeiwebcam</em>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Copy that</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="aboutModalLabel"><span class="glyphicon glyphicon-info-sign"></span> About
+                </h3>
+            </div>
+            <div class="modal-body">
+                <h4>Me</h4>
+                ciao mamma
+                <h4>Google Play Terms of Service</h4>
+                Google Play is a service provided by Google Inc., located at 1600 Amphitheatre Parkway, Mountain View,
+                CA 94043, United States, and is in no way affiliated with the author of this service. This service is
+                thus to be considered in no way supported or endorsed by Google Inc.
+                Using this service you implicitly agree also to the <a
+                        href="https://play.google.com/intl/en/about/play-terms.html">Google Play Terms of Service</a>
+                and <a href="https://www.google.com/policies/terms/">Google Terms of Service</a>. Any rights not
+                expressly granted above are reserved by Google Inc.. You agree that there are no implied rights granted
+                by this Agreement.
+                <h4>Simplex</h4>
+                This page uses a customized theme based on <a href="http://bootswatch.com/simplex/">Simplex</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Copy that</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom"><!-- sistemare su mobile CAZZO-->
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a href="http://api.gplay.ws">
+                    Built using Google Play API
+                </a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" data-toggle="modal" data-target="#helpModal">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                    Help
+                </a>
+            </li>
+            <li>
+                <a href="#" data-toggle="modal" data-target="#aboutModal">
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    About
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="life.js"></script>
+</body>
+</html>
