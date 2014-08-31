@@ -45,7 +45,7 @@ $app['guzzle'] = function () use ($app) {
 };
 
 //Routes
-$app->get('/', function (Application $app) {
+$app->get('/', function () use ($app) {
     return $app['twig']->render('home.twig');
 })->bind('home');
 
