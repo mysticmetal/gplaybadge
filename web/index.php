@@ -20,6 +20,7 @@ $app['debug'] = false;
 $app['security.firewalls'] = [
     'security.firewalls' => [
         'global' => [
+            'pattern' => '^/$',
             'http' => [
                 'real_name' => 'gplay.ws'
             ],
