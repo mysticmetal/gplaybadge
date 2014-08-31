@@ -5,13 +5,31 @@ use Monolog\Handler\ErrorLogHandler;
 use Silex\Application;
 use \GPlayInfo\BadgeController;
 use Silex\Provider\MonologServiceProvider;
+use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application();
+
 $app['debug'] = false;
+
+$app['security.firewalls'] = [
+    'security.firewalls' => [
+        'global' => [
+            'http' => [
+                'real_name' => 'gplay.ws'
+            ],
+            'security' => true,
+            'anonymous' => $app['debug'],
+            'users' => [
+                'demo' => ['ROLE_ADMIN',  'd1f225bc8368365c13341aa09d2cfcd03c8b347facc9048e4a4ec9cc198a489b']
+            ]
+        ]
+    ]
+];
 
 $app->register(new TwigServiceProvider(), [
     'twig.path' => __DIR__ . '/../res/views'
@@ -24,6 +42,12 @@ $app->register(new MonologServiceProvider(), [
 ]);
 
 $app->register(new ServiceControllerServiceProvider());
+
+$app->register(new SecurityServiceProvider(), $app['security.firewalls']);
+
+$app['security.encoder.digest'] = $app->share(function() {
+    return new MessageDigestPasswordEncoder('sha256', false, 1);
+});
 
 $app['ws.auth.header.name'] = 'X-Mashape-Key';
 $app['ws.auth.header.value'] = getenv('MASHAPE_KEY');
