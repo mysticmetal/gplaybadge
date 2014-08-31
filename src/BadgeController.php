@@ -22,7 +22,10 @@ class BadgeController
 
     public function badgeAction()
     {
-        $packageid = $this->app['request']->get('id');
+        $request = $this->app['request'];
+        $guzzle = $this->app['guzzle'];
+
+        $packageid = $request->get('id');
         $lang = $this->app['request']->get('lang');
 
         if (!isset($packageid)) {
@@ -31,11 +34,10 @@ class BadgeController
             return null;
         }
 
-        //TODO Generate 304 response if image is still valid!
 
         $wsResponse = null;
         try {
-            $wsResponse = $this->app['guzzle']->get($this->app['ws.url'] . "?id={$packageid}&lang={$lang}", [
+            $wsResponse = $guzzle->get($this->app['ws.url'] . "?id={$packageid}&lang={$lang}", [
                 $this->app['ws.auth.header.name'] => $this->app['ws.auth.header.value']
             ])->send();
         } catch (ClientErrorResponseException $e) {
@@ -44,13 +46,33 @@ class BadgeController
             return null;
         }
 
-        $imgResponse = $this->app['guzzle']->get($wsResponse->json()['icon'])->send();
+        $response = new Response();
 
-        return new Response($imgResponse->getBody(), $imgResponse->getStatusCode(), [
-            'Cache-Control' => $this->app['debug'] ? 'no-cache' : $wsResponse->getCacheControl(),
-            'Expires' => $this->app['debug'] ? '0' : $wsResponse->getExpires(),
-            'Last-Modified' => $wsResponse->getLastModified(),
-            'Content-Type' => $imgResponse->getContentType()
-        ]);
+        if ($this->app['debug']) {
+            $response->headers->addCacheControlDirective('no-cache');
+            $response->setPrivate();
+            $response->setMaxAge(0);
+            $response->setSharedMaxAge(0);
+            $response->setExpires(new \DateTime());
+        } else {
+            $response->setPublic();
+            $response->setMaxAge($wsResponse->getMaxAge());
+            $response->setSharedMaxAge($wsResponse->getMaxAge());
+            $response->setExpires(new \DateTime($wsResponse->getExpires()));
+            $response->setLastModified(new \DateTime($wsResponse->getLastModified()));
+        }
+
+        if ($response->isNotModified($request)) {
+            $response->setNotModified();
+        } else {
+            //Se devo scaricare l'img
+            $imgResponse = $guzzle->get($wsResponse->json()['icon'])->send();
+            //TODO Image editing
+            $response->setContent($imgResponse->getBody());
+            $response->headers->set('Content-Type', $imgResponse->getContentType());
+
+        }
+        
+        return $response;
     }
 }
