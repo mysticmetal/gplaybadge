@@ -78,7 +78,6 @@ $app->get('/', function () use ($app) {
 })->bind('home');
 
 $app->get('/badge/', 'controllers.badge:badgeAction')
-    ->assert('id', '[\w\.]+')
     ->assert('lang', '[a-z]{2}')
     ->value('lang', 'en')
     ->bind('badge');
