@@ -48,5 +48,5 @@ var resetUi = function () {
         $('#buildButton').attr('disabled', true);
         $("#badgeImg")
             .fadeOut(250)
-            .attr('src', '/badge/?id=' + packageId);
+            .attr('src', badgePath + '?id=' + packageId);
     };

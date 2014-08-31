@@ -8,6 +8,7 @@ use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
+use Silex\Provider\UrlGeneratorServiceProvider;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -42,6 +43,8 @@ $app->register(new MonologServiceProvider(), [
 ]);
 
 $app->register(new ServiceControllerServiceProvider());
+
+$app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new SecurityServiceProvider(), $app['security.firewalls']);
 
