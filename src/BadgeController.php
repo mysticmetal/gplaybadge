@@ -53,7 +53,7 @@ class BadgeController
             $response->setPrivate();
             $response->setMaxAge(0);
             $response->setSharedMaxAge(0);
-            $response->setExpires(new \DateTime());
+            $response->setExpires(new \DateTime('now', new \DateTimeZone('UTC')));
         } else {
             $response->setPublic();
             $response->setMaxAge($wsResponse->getMaxAge());
