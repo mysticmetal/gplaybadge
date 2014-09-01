@@ -8,6 +8,7 @@
 namespace GPlayInfo;
 
 use Guzzle\Http\Exception\ClientErrorResponseException;
+use Guzzle\Http\Exception\CurlException;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
 
