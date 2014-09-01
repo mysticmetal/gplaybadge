@@ -35,18 +35,6 @@ class BadgeController
             return null;
         }
 
-
-        $wsResponse = null;
-        try {
-            $wsResponse = $guzzle->get($this->app['ws.url'] . "?id={$packageid}&lang={$lang}", [
-                $this->app['ws.auth.header.name'] => $this->app['ws.auth.header.value']
-            ])->send();
-        } catch (ClientErrorResponseException $e) {
-            //TODO Return an image with message
-            $this->app->abort($e->getResponse()->getStatusCode());
-            return null;
-        }
-
         $response = new Response();
 
         if ($this->app['debug']) {
@@ -56,17 +44,37 @@ class BadgeController
             $response->setSharedMaxAge(0);
             $response->setExpires(new \DateTime('now', new \DateTimeZone('UTC')));
         } else {
-            $response->setPublic();
-            $response->setMaxAge($wsResponse->getMaxAge());
-            $response->setSharedMaxAge($wsResponse->getMaxAge());
-            $response->setExpires(new \DateTime($wsResponse->getExpires()));
-            $response->setLastModified(new \DateTime($wsResponse->getLastModified()));
+            $now = new \DateTime('now', new \DateTimeZone('UTC'));
+            $eod = new \DateTime('23:59', new \DateTimeZone('UTC'));
+
+            $diff = $eod->diff($now);
+            $age = $diff->s + ($diff->i + ($diff->h + $diff->d * 24) * 60) * 60;
+
+            $response->setMaxAge($age);
+            $response->setSharedMaxAge($age);
+            $response->setExpires($eod);
+            $response->setLastModified(new \DateTime('midnight', new \DateTimeZone('UTC')));
         }
 
         if ($response->isNotModified($request)) {
             $response->setNotModified();
         } else {
             //Se devo scaricare l'img
+            $wsResponse = null;
+            try {
+                $wsResponse = $guzzle->get($this->app['ws.url'] . "?id={$packageid}&lang={$lang}", [
+                    $this->app['ws.auth.header.name'] => $this->app['ws.auth.header.value']
+                ])->send();
+            } catch (ClientErrorResponseException $e) {
+                //TODO Return an image with message
+                $this->app->abort($e->getResponse()->getStatusCode());
+                return null;
+            } catch (CurlException $e) {
+                //TODO Return an image with message
+                $this->app->abort($e->getResponse()->getStatusCode());
+                return null;
+            }
+
             $imgResponse = $guzzle->get($wsResponse->json()['icon'])->send();
             //TODO Image editing
             $response->setContent($imgResponse->getBody());
