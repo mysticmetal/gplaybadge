@@ -61,23 +61,36 @@
         </div>
     </div>
 
-    <div class="row hidden">
-        <div class="col-md-4 col-md-offset-4">
-
-            Copy and paste this HTML into your web site:
-            <div class="input-group">
-                <input onclick="this.select();" type="text" class="form-control" value="html">
+    <div class="row row-md-offset-3" style="display: block" id="badgeCode">
+        <div class="col-md-4 col-md-offset-4 form">
+            <div class="form-group">
+                <label for="html">Copy and paste this HTML into your web site:</label>
+                <div class="input-group">
+                    <input onclick="this.select();" type="text" class="form-control" id="html">
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="button">Copy</button>
                 </span>
+                </div>
             </div>
 
-            Copy and paste this BBCode into a forum:
-            <div class="input-group">
-                <input onclick="this.select();" type="text" class="form-control" value="bbcode">
+            <div class="form-group">
+                <label for="bbcode">Copy and paste this BBCode into a forum:</label>
+                <div class="input-group">
+                    <input onclick="this.select();" type="text" class="form-control" id="bbcode">
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="button">Copy</button>
                 </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="mdown">Copy and paste this Markdown wherever:</label>
+                <div class="input-group">
+                    <input onclick="this.select();" type="text" class="form-control" id="mdown">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Copy</button>
+                </span>
+                </div>
             </div>
         </div>
     </div>
