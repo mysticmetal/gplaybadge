@@ -2,19 +2,24 @@
  * Created by massimilianocannarozzo on 21/06/14.
  */
 
+const img = $('#badgeImg')
+    , code = $('#badgeCode')
+    , createBadgeFormGroup = $('#createBadgeFormGroup')
+    , buildButton = $('#buildButton')
+    , packageIdInput = $('#packageIdInput')
+    , html = $('#html')
+    , bbcode = $('#bbcode')
+    , mdown = $('#mdown');
 $(function () {
-    const img = $("#badgeImg");
+    var imgSrc;
 
     $('form').submit(function (event) {
-        const createBadgeFormGroup = $('#createBadgeFormGroup')
-            , buildButton = $('#buildButton')
-            , packageIdInput = $('#packageIdInput')
-            , packageId = packageIdInput.val();
+        const packageId = packageIdInput.val();
 
         event.preventDefault();
 
         if (packageId) {
-            if (img.attr('src') === undefined || img.attr('src').indexOf(packageId) < 0) {
+            if (imgSrc == null || img.attr('src').indexOf(packageId) < 0) {
                 resetUi();
                 fetchBadge(packageId);
                 packageIdInput.attr('disabled', true);
@@ -34,12 +39,17 @@ $(function () {
     });
 
     img.on('load', function () {
-            img.fadeIn(1000);
-            resetUi();
-        })
-        .on('error', function () {
-            showError('Error generating badge, please check the package name and try again');
-        })
+        img.fadeIn(1000);
+        code.fadeIn(1000);
+        imgSrc = img.attr('src');
+        html.val(packageIdInput.val());
+        bbcode.val(packageIdInput.val());
+        mdown.val(packageIdInput.val());
+        resetUi();
+    }).on('error', function () {
+        imgSrc = null;
+        showError('Error generating badge, please check the package name and try again');
+    })
 });
 
 var resetUi = function () {
@@ -54,7 +64,7 @@ var resetUi = function () {
     , fetchBadge = function (packageId) {
         $('#packageIdInput').attr('disabled', true);
         $('#buildButton').attr('disabled', true);
-        $("#badgeImg")
-            .fadeOut(250)
+        code.fadeOut(250);
+        img.fadeOut(250)
             .attr('src', badgePath + '?id=' + packageId);
     };
