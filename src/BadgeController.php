@@ -67,11 +67,11 @@ class BadgeController
                 ])->send();
             } catch (ClientErrorResponseException $e) {
                 //TODO Return an image with message
-                $this->app->abort($e->getResponse()->getStatusCode());
+                $this->app->abort($e->getResponse()->getStatusCode(), $e->getResponse()->getMessage());
                 return null;
             } catch (CurlException $e) {
                 //TODO Return an image with message
-                $this->app->abort($e->getResponse()->getStatusCode());
+                $this->app->abort($e->getResponse()->getStatusCode(), $e->getResponse()->getMessage());
                 return null;
             }
 
@@ -79,6 +79,7 @@ class BadgeController
             //TODO Image editing
             $response->setContent($imgResponse->getBody());
             $response->headers->set('Content-Type', $imgResponse->getContentType());
+            $imgResponse = $guzzle->get($wsResponse->json()['icon']);
 
         }
         

@@ -1,6 +1,6 @@
 <?php
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use Monolog\Handler\ErrorLogHandler;
 use Silex\Application;
 use \GPlayInfo\BadgeController;
