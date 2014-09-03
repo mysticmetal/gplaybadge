@@ -3,6 +3,8 @@
  */
 
 $(function () {
+    const img = $("#badgeImg");
+
     $('form').submit(function (event) {
         const createBadgeFormGroup = $('#createBadgeFormGroup')
             , buildButton = $('#buildButton')
@@ -12,12 +14,17 @@ $(function () {
         event.preventDefault();
 
         if (packageId) {
-            resetUi();
-            fetchBadge(packageId);
-            packageIdInput.attr('disabled', true);
-            buildButton.attr('disabled', true);
+            if (img.attr('src') === undefined || img.attr('src').indexOf(packageId) < 0) {
+                resetUi();
+                fetchBadge(packageId);
+                packageIdInput.attr('disabled', true);
+                buildButton.attr('disabled', true);
+            } else {
+                showError('Please change package id');
+                createBadgeFormGroup.addClass('has-error');
+            }
         } else {
-            showError('Missing package id');
+            showError('Please enter a package id');
             createBadgeFormGroup.addClass('has-error');
         }
 
@@ -26,12 +33,12 @@ $(function () {
         });
     });
 
-    const img = $("#badgeImg").on('load', function () {
+    img.on('load', function () {
             img.fadeIn(1000);
             resetUi();
         })
         .on('error', function () {
-            showError('cazzo');
+            showError('Error generating badge, please check the package name and try again');
         })
 });
 
@@ -41,7 +48,8 @@ var resetUi = function () {
     }
     , showError = function (error) {
         resetUi();
-        alert(error);
+        $('#alertModalBody').text(error);
+        $('#alertModal').modal('show')
     }
     , fetchBadge = function (packageId) {
         $('#packageIdInput').attr('disabled', true);
