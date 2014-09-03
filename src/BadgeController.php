@@ -62,9 +62,15 @@ class BadgeController
             //Se devo scaricare l'img
             $wsResponse = null;
             try {
-                $wsResponse = $guzzle->get($this->app['ws.url'] . "?id={$packageid}&lang={$lang}", [
-                    $this->app['ws.auth.header.name'] => $this->app['ws.auth.header.value']
-                ])->send();
+                $wsResponse = $guzzle->get($this->app['ws.url'], [
+                    'headers' => [
+                        $this->app['ws.auth.header.name'] => $this->app['ws.auth.header.value']
+                    ],
+                    'query' => [
+                        'id' => $packageid,
+                        'lang' => $lang
+                    ]
+                ]);
             } catch (ClientErrorResponseException $e) {
                 //TODO Return an image with message
                 $this->app->abort($e->getResponse()->getStatusCode(), $e->getResponse()->getMessage());
