@@ -40,7 +40,7 @@ $app->register(new TwigServiceProvider(), [
 $app->register(new MonologServiceProvider(), [
     'monolog.logfile' => '/dev/null',
     'monolog.name' => 'gplay.ws',
-    'monolog.handler.debug' => new ErrorLogHandler()
+    'monolog.handler' => new ErrorLogHandler()
 ]);
 
 $app->register(new ServiceControllerServiceProvider());
