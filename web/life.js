@@ -42,9 +42,9 @@ $(function () {
         img.fadeIn(1000);
         code.fadeIn(1000);
         imgSrc = img.attr('src');
-        html.val(packageIdInput.val());
-        bbcode.val(packageIdInput.val());
-        mdown.val(packageIdInput.val());
+        html.val('<img src="' + window.location.origin + imgSrc + '">');
+        bbcode.val('[img]' + window.location.origin + imgSrc + '[/img]');
+        mdown.val('![Badge](' + window.location.origin + imgSrc + ')');
         resetUi();
     }).on('error', function () {
         imgSrc = null;
