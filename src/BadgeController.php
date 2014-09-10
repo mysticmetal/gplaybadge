@@ -32,8 +32,7 @@ class BadgeController
         $lang = $this->app['request']->get('lang');
 
         if (!isset($packageid)) {
-            //TODO Return an image with message
-            $this->app->abort(500, 'Invalid package id');
+            $this->app->abort(400, 'Missing package id');
             return null;
         }
 
