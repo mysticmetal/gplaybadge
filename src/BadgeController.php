@@ -20,7 +20,7 @@ class BadgeController
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->$fontFilePath = __DIR__ . '/../res/fonts/RobotoCondensed-Light.ttf';
+        $this->fontFilePath = __DIR__ . '/../res/fonts/RobotoCondensed-Light.ttf';
     }
 
     public function badgeAction()
@@ -64,7 +64,7 @@ class BadgeController
             $wsResponse = null;
 
             $textStyle = function ($font) {
-                $font->file($this->$fontFilePath);
+                $font->file($this->fontFilePath);
                 $font->color('#0099CC');
             };
 
