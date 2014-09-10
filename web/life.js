@@ -38,12 +38,16 @@ $(function () {
     });
 
     img.on('load', function () {
+        const packageId = packageIdInput.val()
+            , imgUrl = window.location.origin + imgSrc
+            , storeUrl = 'https://play.google.com/store/apps/details?id=' + packageId;
+
         img.fadeIn(1000);
         code.fadeIn(1000);
         imgSrc = img.attr('src');
-        html.val('<img src="' + window.location.origin + imgSrc + '">');
-        bbcode.val('[img]' + window.location.origin + imgSrc + '[/img]');
-        mdown.val('![Badge](' + window.location.origin + imgSrc + ')');
+        html.val('<a href="' + storeUrl + '"><img src="' + imgUrl + '</a>');
+        bbcode.val('[url=' + storeUrl + '][img]' + window.location.origin + imgSrc + '[/img][/url]');
+        mdown.val('[![Badge](' + window.location.origin + imgSrc + ')](' + storeUrl + ')');
         resetUi();
     }).on('error', function () {
         imgSrc = null;
