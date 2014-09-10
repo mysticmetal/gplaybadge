@@ -62,6 +62,14 @@ class BadgeController
         } else {
             //Se devo scaricare l'img
             $wsResponse = null;
+
+            $textStyle = function ($font) {
+                $font->file($this->FONT_FILE);
+                $font->color('#0099CC');
+            };
+
+            $img = Image::canvas(450, 130, '#FFFFFF');
+
             try {
                 $wsResponse = $guzzle->get($this->app['ws.url'], [
                     'headers' => [
@@ -72,29 +80,27 @@ class BadgeController
                         'lang' => $lang
                     ]
                 ]);
+
+                $jsonResponse = $wsResponse->json();
+                $imgResponse = $guzzle->get($jsonResponse['icon']);
+
+                $img->text($jsonResponse['name'], 80, 20, $textStyle);
+                $img->text('by ' . $jsonResponse['author'], 80, 40, $textStyle);
+                $img->text($jsonResponse['rating']['display'] . '/5.0', 80, 60, $textStyle);
+                $img->text('(' . $jsonResponse['rating']['count'] . ' ratings)', 120, 60, $textStyle);
+                $img->text($jsonResponse['numDownloads'] . ' downloads', 80, 80, $textStyle);
+                $img->text('published ' . $jsonResponse['datePublished'], 80, 100, $textStyle);
+                $img->insert(Image::make($imgResponse->getBody()->__toString())->resize(64, 64), 'top-left', 10, 10);
+                $img->text('gplay.ws', 410, 125);
+
             } catch (RequestException $e) {
-                //TODO Return an image with message
-                $this->app->abort($e->getResponse()->getStatusCode(), $e->getResponse()->getMessage());
-                return null;
+                if($e->getCode() == 404){
+                    $img->text($e->getResponse()->json()['error'], 80, 20, $textStyle);
+                } else {
+                    $this->app->abort($e->getCode(), 'Error generating image');
+                    return false;
+                }
             }
-
-            $jsonResponse = $wsResponse->json();
-            $imgResponse = $guzzle->get($jsonResponse['icon']);
-
-            $textStyle = function ($font) {
-                $font->file($this->FONT_FILE);
-                $font->color('#0099CC');
-            };
-
-            $img = Image::canvas(450, 130, '#FFFFFF');
-            $img->text($jsonResponse['name'] . ' ' . $jsonResponse['versionName'], 80, 20, $textStyle);
-            $img->text('by ' . $jsonResponse['author'], 80, 40, $textStyle);
-            $img->text($jsonResponse['rating']['display'], 80, 60, $textStyle);
-            $img->text('(' . $jsonResponse['rating']['count'] . ' ratings)', 100, 60, $textStyle);
-            $img->text($jsonResponse['numDownloads'] . ' downloads', 80, 80, $textStyle);
-            $img->text('published ' . $jsonResponse['datePublished'], 80, 100, $textStyle);
-            $img->insert(Image::make($imgResponse->getBody()->__toString())->resize(64, 64), 'top-left', 10, 10);
-            $img->text('gplay.ws', 410, 125);
 
             $response->setContent($img->encode('png'));
             $response->headers->set('Content-Type', 'image/png');
