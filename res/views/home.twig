@@ -7,10 +7,10 @@
 
     <title>gplay.ws</title>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css">
-    <link href="//fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet" type="text/css">
-    <link href="{{ app.request.basepath }}/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"href="//fonts.googleapis.com/css?family=Roboto:100">
+    <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/style.css">
 </head>
 <body>
 
@@ -198,11 +198,11 @@
         </ul>
     </div>
 </nav>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
     const badgePath = {{ app.url_generator.generate('badge') }};
 </script>
-<script src="life.js"></script>
+<script type="text/javascript" src="life.js"></script>
 </body>
 </html>

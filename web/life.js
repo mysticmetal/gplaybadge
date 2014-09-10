@@ -10,6 +10,7 @@ const img = $('#badgeImg')
     , html = $('#html')
     , bbcode = $('#bbcode')
     , mdown = $('#mdown');
+
 $(function () {
     var imgSrc;
 
@@ -26,11 +27,9 @@ $(function () {
                 buildButton.attr('disabled', true);
             } else {
                 showError('Please change package id');
-                createBadgeFormGroup.addClass('has-error');
             }
         } else {
             showError('Please enter a package id');
-            createBadgeFormGroup.addClass('has-error');
         }
 
         packageIdInput.focus(function () {
