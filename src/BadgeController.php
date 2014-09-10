@@ -84,7 +84,7 @@ class BadgeController
                 $jsonResponse = $wsResponse->json();
                 $imgResponse = $guzzle->get($jsonResponse['icon']);
 
-                $img->text($jsonResponse['name'], 80, 20, $textStyle);
+                $img->text($jsonResponse['name'] . ' ' . $jsonResponse['versionName'], 80, 20, $textStyle);
                 $img->text('by ' . $jsonResponse['author'], 80, 40, $textStyle);
                 $img->text($jsonResponse['rating']['display'] . '/5.0', 80, 60, $textStyle);
                 $img->text('(' . $jsonResponse['rating']['count'] . ' ratings)', 120, 60, $textStyle);
