@@ -15,12 +15,12 @@ use Symfony\Component\HttpFoundation\Response;
 class BadgeController
 {
     protected $app;
-    private $FONT_FILE;
+    private $fontFilePath;
 
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->FONT_FILE = __DIR__ . '/../res/fonts/RobotoCondensed-Light.ttf';
+        $this->$fontFilePath = __DIR__ . '/../res/fonts/RobotoCondensed-Light.ttf';
     }
 
     public function badgeAction()
@@ -64,7 +64,7 @@ class BadgeController
             $wsResponse = null;
 
             $textStyle = function ($font) {
-                $font->file($this->FONT_FILE);
+                $font->file($this->$fontFilePath);
                 $font->color('#0099CC');
             };
 
