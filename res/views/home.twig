@@ -3,25 +3,33 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>gplay.ws</title>
 
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.1.1/lumen/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"href="//fonts.googleapis.com/css?family=Roboto:100">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100">
     <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/style.css">
 </head>
 <body>
 
-<div class="container-fluid text-center">
+<div class="col-md-12 text-right header">
+    <a href="#" data-toggle="modal" data-target="#helpModal">
+        <span class="glyphicon glyphicon-question-sign"></span> Help&nbsp;
+    </a>
+</div>
+
+<div class="container-fluid text-center container" role="main" id="container">
     <div class="row">
         <div class="col-md-12">&nbsp;</div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <img class="hidden">
 
+    <div class="row">
+        <div class="col-xs-12">&nbsp;</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <img src="" class="hidden">
             <h1>
                 <br>gplay.ws
                 <small><br>Android apps badge galore</small>
@@ -51,7 +59,8 @@
             <form id="createBadgeForm" class="form-inline">
                 <div class="form-group col-md-4 col-md-offset-4" id="createBadgeFormGroup">
                     <div class="input-group">
-                        <input class="form-control" placeholder="Application package id" id="packageIdInput">
+                        <input class="form-control" placeholder="Application package id" id="packageIdInput"
+                               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary" id="buildButton">Build my badge!</button>
                         </span>
@@ -63,7 +72,7 @@
 
     <div class="row text-center" id="badgeDiv">
         <div class="col-md-12">
-            <img id="badgeImg">
+            <img src="" id="badgeImg">
         </div>
     </div>
 
@@ -98,6 +107,18 @@
                 </span>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="bottombar">
+        <div class="col-xs-6 text-left">
+            <a href="http://api.gplay.ws"><em>Powered by Google Play API</em></a>
+        </div>
+        <div class="col-xs-6 text-right">
+            <a href="#" data-toggle="modal" data-target="#aboutModal">
+                <span class="glyphicon glyphicon-info-sign"></span> About
+            </a>
         </div>
     </div>
 </div>
@@ -159,49 +180,11 @@
     </div>
 </div>
 
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="alertModalLabel"
-     aria-hidden="true" id="alertModal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="alertModalLabel"><span class="glyphicon glyphicon-warning-sign"></span>
-                    Hey!
-                </h4>
-            </div>
-            <div class="modal-body" id="alertModalBody">
-            </div>
-        </div>
-    </div>
-</div>
-
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left">
-            <li>
-                <a href="http://api.gplay.ws">
-                    Powered by Google Play API
-                </a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a href="#" data-toggle="modal" data-target="#helpModal">
-                    <!--<span class="glyphicon glyphicon-question-sign"></span>-->
-                    Help
-                </a>
-            </li>
-            <li>
-                <a href="#" data-toggle="modal" data-target="#aboutModal">
-                    <!--<span class="glyphicon glyphicon-info-sign"></span>-->
-                    About
-                </a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
 <script type="text/javascript">
     const badgePath = {{ app.url_generator.generate('badge') }};
 </script>

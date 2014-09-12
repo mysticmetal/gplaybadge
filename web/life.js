@@ -4,12 +4,20 @@
 
 const img = $('#badgeImg')
     , code = $('#badgeCode')
-    , createBadgeFormGroup = $('#createBadgeFormGroup')
     , buildButton = $('#buildButton')
     , packageIdInput = $('#packageIdInput')
     , html = $('#html')
     , bbcode = $('#bbcode')
-    , mdown = $('#mdown');
+    , mdown = $('#mdown')
+    , opts = {
+        lines: 13, // The number of lines to draw
+        length: 11, // The length of each line
+        width: 16, // The line thickness
+        radius: 33, // The radius of the inner circle
+        color: '#0099CC', // #rgb or #rrggbb or array of colors
+        trail: 27, // Afterglow percentage
+        hwaccel: true // Whether to use hardware acceleration
+    };
 
 $(function () {
     var imgSrc;
@@ -37,7 +45,7 @@ $(function () {
         });
     });
 
-    img.on('load', function () {
+    img.on('load',function () {
         const packageId = packageIdInput.val()
             , imgUrl = window.location.origin + imgSrc
             , storeUrl = 'https://play.google.com/store/apps/details?id=' + packageId;
@@ -58,17 +66,28 @@ $(function () {
 var resetUi = function () {
         $('#packageIdInput').attr('disabled', false);
         $('#buildButton').attr('disabled', false);
+        $('.spinner').fadeOut(250, function () {
+            $('#createBadgeFormGroup').spin(false);
+        });
     }
     , showError = function (error) {
         resetUi();
-        $('#alertModalBody').text(error);
-        $('#alertModal').modal('show')
+        $.bootstrapGrowl(error, {
+            ele: '#container', // which element to append to
+            type: 'danger', // (null, 'info', 'danger', 'success')
+            align: 'center', // ('left', 'right', or 'center')
+            width: 'auto', // (integer, or 'auto')
+            delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
+            allow_dismiss: false, // If true then will display a cross to close the popup.
+            stackup_spacing: 10 // spacing between consecutively stacked growls.
+        });
     }
     , fetchBadge = function (packageId) {
         $('#packageIdInput').attr('disabled', true);
         $('#buildButton').attr('disabled', true);
+        $('#createBadgeFormGroup').spin(opts);
         code.fadeOut(250);
-        img.fadeOut(250, function(){
+        img.fadeOut(250, function () {
             img.attr('src', badgePath + '?id=' + packageId);
         });
     };
