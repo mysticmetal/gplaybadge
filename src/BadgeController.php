@@ -28,8 +28,8 @@ class BadgeController
         $request = $this->app['request'];
         $guzzle = $this->app['guzzle'];
 
-        $packageid = $request->get('id');
-        $lang = $this->app['request']->get('lang');
+        $packageid = $request->query->get('id');
+        $lang = $request->query->get('lang');
 
         if (!isset($packageid)) {
             $this->app->abort(400, 'Missing package id');
