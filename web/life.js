@@ -10,12 +10,14 @@ const img = $('#badgeImg')
     , bbcode = $('#bbcode')
     , mdown = $('#mdown')
     , opts = {
-        lines: 13, // The number of lines to draw
-        length: 11, // The length of each line
-        width: 16, // The line thickness
-        radius: 33, // The radius of the inner circle
-        color: '#0099CC', // #rgb or #rrggbb or array of colors
-        trail: 27, // Afterglow percentage
+        lines: 9, // The number of lines to draw
+        length: 20, // The length of each line
+        width: 6, // The line thickness
+        radius: 26, // The radius of the inner circle
+        color: '#4285f4', // #rgb or #rrggbb or array of colors
+        trail: 10, // Afterglow percentage
+        corners: 0, // Corner roundness (0..1)
+        speed: 0.5, // Rounds per second
         hwaccel: true // Whether to use hardware acceleration
     };
 
