@@ -65,7 +65,7 @@ class BadgeController
 
             $textStyle = function ($font) {
                 $font->file($this->fontFilePath);
-                $font->color('#0099CC');
+                $font->color('#4285f4');
             };
 
             $img = Image::canvas(450, 130, '#FFFFFF');
