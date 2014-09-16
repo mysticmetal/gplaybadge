@@ -49,7 +49,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <img src="" class="hidden">
+            <img src="{{ app.request.basepath }}/logo.png" class="hidden">
             <h1>
                 <br>gplay.ws
                 <small><br>Android apps badge galore</small>
@@ -207,6 +207,6 @@
 <script type="text/javascript">
     const badgePath = {{ app.url_generator.generate('badge') }};
 </script>
-<script type="text/javascript" src="life.js"></script>
+<script type="text/javascript" src="{{ app.request.basepath }}/life.js"></script>
 </body>
 </html>
