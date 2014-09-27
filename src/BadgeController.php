@@ -20,7 +20,7 @@ class BadgeController
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->fontFilePath = __DIR__ . '/../res/fonts/RobotoCondensed-Light.ttf';
+        $this->fontFilePath = __DIR__ . '/../res/fonts/Roboto-Regular.ttf';
     }
 
     public function badgeAction()
