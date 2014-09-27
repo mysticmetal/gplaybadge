@@ -16,11 +16,13 @@ class BadgeController
 {
     protected $app;
     private $fontFilePath;
+    private $fontColor;
 
     public function __construct(Application $app)
     {
         $this->app = $app;
         $this->fontFilePath = __DIR__ . '/../res/fonts/Roboto-Regular.ttf';
+        $this->fontColor = '#2196F3';
     }
 
     public function badgeAction()
@@ -65,7 +67,7 @@ class BadgeController
 
             $textStyle = function ($font) {
                 $font->file($this->fontFilePath);
-                $font->color('#4285f4');
+                $font->color($this->fontColor);
             };
 
             $img = Image::canvas(450, 130, '#FFFFFF');

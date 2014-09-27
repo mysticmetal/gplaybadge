@@ -14,7 +14,7 @@ const img = $('#badgeImg')
         length: 20, // The length of each line
         width: 6, // The line thickness
         radius: 26, // The radius of the inner circle
-        color: '#4285f4', // #rgb or #rrggbb or array of colors
+        color: '#2196F3', // #rgb or #rrggbb or array of colors
         trail: 10, // Afterglow percentage
         corners: 0, // Corner roundness (0..1)
         speed: 0.5, // Rounds per second
