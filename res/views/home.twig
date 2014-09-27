@@ -25,10 +25,8 @@
     <meta property="og:description" content="Easily create a badge to promote your own Android application in a single step!" />
     <meta property="og:site_name" content="gplay.ws" />
 
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/css-compiled/ripples.css">
-    <link rel="stylesheet" type="text/css" href="https://rawgit.com/FezVrasta/bootstrap-material-design/master/css-compiled/material.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:100">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/paper/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/style.css">
 </head>
 <body>
@@ -189,8 +187,8 @@
                 and <a href="https://www.google.com/policies/terms/" target="_blank">Google Terms of Service</a>. Any rights not
                 expressly granted above are reserved by Google Inc.. You agree that there are no implied rights granted
                 by this Agreement.
-                <h4>Lumen</h4>
-                This page uses a customized theme based on <a href="http://bootswatch.com/lumen/">Lumen</a>
+                <h4>Paper</h4>
+                This page uses a customized theme based on <a href="http://bootswatch.com/paper/">Paper</a>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Copy that</button>
@@ -199,17 +197,14 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    const badgePath = {{ app.url_generator.generate('badge') }};
+</script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
-
-<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/scripts/ripples.js"></script>
-<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/scripts/material.js"></script>
-<script type="text/javascript">
-    const badgePath = {{ app.url_generator.generate('badge') }};
-</script>
 <script type="text/javascript" src="{{ app.request.basepath }}/life.js"></script>
 </body>
 </html>
