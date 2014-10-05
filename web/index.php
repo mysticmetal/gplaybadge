@@ -1,5 +1,6 @@
 <?php
 
+use GPlayInfo\HomeController;
 use GuzzleHttp\Client;
 use Monolog\Handler\ErrorLogHandler;
 use Silex\Application;
@@ -63,6 +64,10 @@ $app['controllers.badge'] = $app->share(function() use ($app) {
     return new BadgeController($app);
 });
 
+$app['controllers.home'] = $app->share(function() use ($app) {
+    return new HomeController($app);
+});
+
 $app['guzzle_ws'] = function () use ($app) {
     $g = new Client([
         'base_url' => $app['ws.url'],
@@ -77,9 +82,8 @@ $app['guzzle_ws'] = function () use ($app) {
 };
 
 //Routes
-$app->get('/', function () use ($app) {
-    return $app['twig']->render('home.twig');
-})->bind('home');
+$app->get('/','controllers.home:homeAction')
+    ->bind('home');
 
 $app->get('/badge/', 'controllers.badge:badgeAction')
     ->assert('lang', '[a-z]{2}')
