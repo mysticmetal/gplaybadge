@@ -28,7 +28,7 @@ class BadgeController
     public function badgeAction()
     {
         $request = $this->app['request'];
-        $guzzle = $this->app['guzzle'];
+        $guzzle = $this->app['guzzle_ws'];
 
         $packageid = $request->query->get('id');
         $lang = $request->query->get('lang');
@@ -73,10 +73,7 @@ class BadgeController
             $img = Image::canvas(450, 130, '#FFFFFF');
 
             try {
-                $wsResponse = $guzzle->get($this->app['ws.url'], [
-                    'headers' => [
-                        $this->app['ws.auth.header.name'] => $this->app['ws.auth.header.value']
-                    ],
+                $wsResponse = $guzzle->get('/applicationDetails', [
                     'query' => [
                         'id' => $packageid,
                         'lang' => $lang

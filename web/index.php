@@ -63,10 +63,14 @@ $app['controllers.badge'] = $app->share(function() use ($app) {
     return new BadgeController($app);
 });
 
-$app['guzzle'] = function () use ($app) {
+$app['guzzle_ws'] = function () use ($app) {
     $g = new Client([
+        'base_url' => $app['ws.url'],
         'defaults' => [
-            'headers' => ['User-Agent' => $app['ws.useragent'] ]
+            'headers' => [
+                'User-Agent' => $app['ws.useragent'],
+                $app['ws.auth.header.name'] => $app['ws.auth.header.value']
+            ]
         ]
     ]);
     return $g;
