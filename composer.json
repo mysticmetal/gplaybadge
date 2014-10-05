@@ -1,4 +1,7 @@
 {
+    "name": "gplayinfo/gplayinfo",
+    "description": "www.gplay.ws",
+    "license": "proprietary",
     "require": {
         "silex/silex": "~1.2",
         "guzzlehttp/guzzle": "~4.2.0",
