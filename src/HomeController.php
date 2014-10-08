@@ -8,6 +8,7 @@
 namespace GPlayInfo;
 
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use Silex\Application;
 
 class HomeController
@@ -29,6 +30,8 @@ class HomeController
             $topApps = $guzzle->get('/topFreeApps')->json();
             print_r($topApps);
         } catch (ClientException $e) {
+            print_r($e->getMessage());
+        } catch (RequestException $e) {
             print_r($e->getMessage());
         }
 
