@@ -23,18 +23,22 @@ class HomeController
 
     public function homeAction()
     {
-        //TODO Fetch top chart package names and pass it to twig template
+        $topApps = [];
         $guzzle = $this->app['guzzle_ws'];
 
         try {
             $topApps = $guzzle->get('/topFreeApps')->json();
-            print_r($topApps);
         } catch (ClientException $e) {
             print_r($e->getMessage());
         } catch (RequestException $e) {
             print_r($e->getMessage());
         }
 
-        return $this->app['twig']->render('home.twig');
+        array_splice($topApps, 10);
+        shuffle($topApps);
+
+        return $this->app['twig']->render('home.twig', [
+            'top_apps' => $topApps
+        ]);
     }
 } 
