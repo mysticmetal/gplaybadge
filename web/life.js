@@ -62,7 +62,7 @@ $(function () {
     }).on('error', function () {
         imgSrc = null;
         showError('Error generating badge, please check the package name and try again');
-    })
+    });
 });
 
 var resetUi = function () {
