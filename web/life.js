@@ -63,6 +63,15 @@ $(function () {
         imgSrc = null;
         showError('Error generating badge, please check the package name and try again');
     });
+
+    $('.slick').slick({
+        infinite: true,
+        lazyLoad: 'ondemand',
+        fade: true,
+        autoplay: true,
+        autoplaySpeed: 7000
+    });
+
 });
 
 var resetUi = function () {
