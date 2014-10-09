@@ -85,7 +85,7 @@ class BadgeController
 
                 $img->text("{$jsonResponse['name']} {$jsonResponse['versionName']}", 80, 20, $textStyle);
                 $img->text("by {$jsonResponse['author']}", 80, 40, $textStyle);
-                $img->text("{$jsonResponse['rating']['display']}/5.0 ({$jsonResponse['rating']['count']} ratings)", 80, 60, $textStyle);
+                $img->text("{$jsonResponse['rating']['display']}/5.0 (" . number_format($jsonResponse['rating']['count']) . " ratings)", 80, 60, $textStyle);
                 $img->text("{$jsonResponse['numDownloads']} downloads", 80, 80, $textStyle);
                 $img->text("Published {$jsonResponse['datePublished']}", 80, 100, $textStyle);
                 $img->insert(Image::make($imgResponse->getBody()->__toString())->resize(64, 64), 'top-left', 10, 10);
