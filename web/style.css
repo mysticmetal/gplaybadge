@@ -4,6 +4,10 @@ body, html {
 #badgeImg {
     margin: 10px;
 }
+#badgeCode {
+    margin-bottom: 100px;
+    display: none;
+}
 .badgeCarousel {
     margin: auto;
     height: 130px
