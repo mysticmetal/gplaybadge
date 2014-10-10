@@ -16,7 +16,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $app = new Application();
 
-$app['debug'] = false;
+$app['debug'] = getenv('ENVIRONMENT') == 'dev';
 
 $app['security.firewalls'] = [
     'security.firewalls' => [
