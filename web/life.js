@@ -59,6 +59,27 @@ $(function () {
         autoplaySpeed: 7000
     });
 
+    const afterCopy = function (event) {
+        showMessage('Code copied to clipboard', false);
+    };
+
+    const clipHtml = new ZeroClipboard($('#copy-html'));
+    clipHtml.on("beforecopy", function (event) {
+        this.setText(html.val());
+    });
+    clipHtml.on("aftercopy", afterCopy);
+
+    const clipBB = new ZeroClipboard($('#copy-bbcode'));
+    clipBB.on("beforecopy", function (event) {
+        this.setText(bbcode.val());
+    });
+    clipBB.on("aftercopy", afterCopy);
+
+    const clipMD = new ZeroClipboard($('#copy-mdown'));
+    clipMD.on("beforecopy", function (event) {
+        this.setText(mdown.val());
+    });
+    clipMD.on("aftercopy", afterCopy);
 });
 
 var resetUi = function () {
