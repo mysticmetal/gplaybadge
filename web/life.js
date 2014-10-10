@@ -67,9 +67,12 @@ var resetUi = function () {
     }
     , showError = function (error) {
         resetUi();
-        $.bootstrapGrowl(error, {
+        showMessage(error, true)
+    }
+    , showMessage = function (message, isError) {
+        $.bootstrapGrowl(message, {
             ele: '#container', // which element to append to
-            type: 'danger', // (null, 'info', 'danger', 'success')
+            type: isError ? 'danger' : 'success', // (null, 'info', 'danger', 'success')
             align: 'center', // ('left', 'right', or 'center')
             width: 'auto', // (integer, or 'auto')
             delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
