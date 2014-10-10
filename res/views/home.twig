@@ -15,13 +15,13 @@
     <meta name="twitter:description" content="Easily create a badge to promote your own Android application in a single step!">
     <meta name="twitter:creator" content="@maxcannamc">
     <!-- Twitter Summary card images must be at least 200x200px -->
-    <meta name="twitter:image" content="{{ app.request.basepath }}/logo.png">
+    <meta name="twitter:image" content="{{ app.url_generator.generate('badge') }}?id={{ top_apps[0].id }}">
 
     <!-- Open Graph data -->
     <meta property="og:title" content="gplay.ws" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ app.url_generator.generate('badge') }}" />
-    <meta property="og:image" content="{{ app.request.basepath }}/logo.png" />
+    <meta property="og:image" content="{{ app.url_generator.generate('badge') }}?id={{ top_apps[0].id }}" />
     <meta property="og:description" content="Easily create a badge to promote your own Android application in a single step!" />
     <meta property="og:site_name" content="gplay.ws" />
 
