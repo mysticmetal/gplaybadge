@@ -32,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/style.css">
 </head>
 <body>
+<!--
 
 <div class="col-md-12 text-right header">
     <a href="#" data-toggle="modal" data-target="#helpModal">
@@ -39,6 +40,7 @@
     </a>
 </div>
 
+-->
 <div class="container-fluid text-center container" role="main" id="container">
     <div class="row">
         <div class="col-xs-12">
@@ -84,6 +86,18 @@
             <form id="createBadgeForm" class="form-inline">
                 <div class="form-group col-md-4 col-md-offset-4" id="createBadgeFormGroup">
                     <div class="input-group">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="modal" data-target="#helpModal" title="Help">
+                                <span class="glyphicon glyphicon-question-sign"></span>
+                            </a>
+                        </span>
+                        <!--
+                                                <span class="input-group-btn">
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#helpModal" title="Help">
+                                <span class="glyphicon glyphicon-question-sign"></span>
+                            </a>
+                            -->
+                        </span>
                         <input class="form-control" placeholder="app package id" id="packageIdInput">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary ladda-button" data-style="zoom-in" id="buildButton"><span class="ladda-label">Build my badge!</span></button>
