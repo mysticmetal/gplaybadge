@@ -92,12 +92,8 @@ class BadgeController
                 $img->text("gplay.ws", 410, 125); //TODO Customize this text style
 
             } catch (RequestException $e) {
-                if($e->getCode() == 404){
-                    $img->text($e->getResponse()->json()['error'], 80, 20, $textStyle);
-                } else {
-                    $this->app->abort($e->getCode(), 'Error generating image');
-                    return false;
-                }
+                $this->app->abort($e->getCode(), 'Error generating image');
+                return false;
             }
 
             $response->setContent($img->encode('png'));
