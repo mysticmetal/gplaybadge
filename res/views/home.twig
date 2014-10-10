@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/paper/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.1.0/ladda-themeless.min.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.css">
     <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/style.css">
 </head>
@@ -85,7 +86,7 @@
                     <div class="input-group">
                         <input class="form-control" placeholder="app package id" id="packageIdInput">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary" id="buildButton">Build my badge!</button>
+                            <button type="submit" class="btn btn-primary ladda-button" data-style="zoom-in" id="buildButton"><span class="ladda-label">Build my badge!</span></button>
                         </span>
                     </div>
                 </div>
@@ -207,8 +208,8 @@
 </script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/jquery.spin.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.1.0/spin.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.1.0/ladda.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.min.js"></script>
 <script type="text/javascript" src="{{ app.request.basepath }}/life.js"></script>

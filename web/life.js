@@ -4,37 +4,25 @@
 
 const img = $('#badgeImg')
     , code = $('#badgeCode')
-    , buildButton = $('#buildButton')
     , packageIdInput = $('#packageIdInput')
     , html = $('#html')
     , bbcode = $('#bbcode')
-    , mdown = $('#mdown')
-    , opts = {
-        lines: 9, // The number of lines to draw
-        length: 20, // The length of each line
-        width: 6, // The line thickness
-        radius: 26, // The radius of the inner circle
-        color: '#2196F3', // #rgb or #rrggbb or array of colors
-        trail: 10, // Afterglow percentage
-        corners: 0, // Corner roundness (0..1)
-        speed: 0.5, // Rounds per second
-        hwaccel: true // Whether to use hardware acceleration
-    };
+    , mdown = $('#mdown');
+var buildButton;
 
 $(function () {
     var imgSrc;
 
-    $('form').submit(function (event) {
+    $('#buildButton').click(function (event) {
         const packageId = packageIdInput.val();
 
         event.preventDefault();
-
+        buildButton = Ladda.create(this);
         if (packageId) {
             if (imgSrc == null || img.attr('src').indexOf(packageId) < 0) {
                 resetUi();
                 fetchBadge(packageId);
                 packageIdInput.attr('disabled', true);
-                buildButton.attr('disabled', true);
             } else {
                 showError('Please change package id');
             }
@@ -76,10 +64,7 @@ $(function () {
 
 var resetUi = function () {
         $('#packageIdInput').attr('disabled', false);
-        $('#buildButton').attr('disabled', false);
-        $('.spinner').fadeOut(250, function () {
-            $('#createBadgeFormGroup').spin(false);
-        });
+        buildButton.stop()
     }
     , showError = function (error) {
         resetUi();
@@ -95,8 +80,7 @@ var resetUi = function () {
     }
     , fetchBadge = function (packageId) {
         $('#packageIdInput').attr('disabled', true);
-        $('#buildButton').attr('disabled', true);
-        $('#createBadgeFormGroup').spin(opts);
+        buildButton.start();
         code.fadeOut(250);
         img.fadeOut(250, function () {
             img.attr('src', badgePath + '?id=' + packageId);
