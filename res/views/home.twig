@@ -61,7 +61,7 @@
     </div>
     <div class="row">
         <div class="col-md-6  col-md-offset-3">
-            <div class="badgeCarousel">
+            <div id="badgeCarousel">
                 {% for top_app in top_apps %}
                     <div>
                         <img data-lazy="{{ app.url_generator.generate('badge') }}?id={{ top_app.id }}" class="badgeCarouselItem">
