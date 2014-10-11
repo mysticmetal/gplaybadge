@@ -28,10 +28,6 @@ $(function () {
         } else {
             showError('Please enter a package id');
         }
-
-        packageIdInput.focus(function () {
-            resetUi();
-        });
     });
 
     img.on('load',function () {
