@@ -218,7 +218,8 @@
 </div>
 
 <script type="text/javascript">
-    const badgePath = {{ app.url_generator.generate('badge') }};
+    const badgePath = '{{ app.url_generator.generate('badge') }}'
+            ,topApps = {{ top_apps|json_encode()|raw }};
 </script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
