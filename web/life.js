@@ -23,10 +23,10 @@ $(function () {
                 resetUi();
                 fetchBadge(packageId);
             } else {
-                showError('Please change package id');
+                showError('Again!?');
             }
         } else {
-            showError('Please enter a package id');
+            showError('Unfortunately I couldn\'t read your mind');
         }
     });
 
@@ -44,7 +44,7 @@ $(function () {
         resetUi();
     }).on('error', function () {
         imgSrc = null;
-        showError('Error generating badge, please check the package name and try again');
+        showError('Aw, Snap! Check the package name and try again');
     });
 
     $('.slick').slick({
@@ -56,7 +56,7 @@ $(function () {
     });
 
     const afterCopy = function () {
-        showMessage('Code copied to clipboard', false);
+        showMessage('Code copied to clipboard, paste, paste, paste!', false);
     };
 
     const clipHtml = new ZeroClipboard($('#copy-html'));
