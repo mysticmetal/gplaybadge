@@ -59,24 +59,24 @@ $(function () {
         autoplaySpeed: 7000
     });
 
-    const afterCopy = function (event) {
+    const afterCopy = function () {
         showMessage('Code copied to clipboard', false);
     };
 
     const clipHtml = new ZeroClipboard($('#copy-html'));
-    clipHtml.on("beforecopy", function (event) {
+    clipHtml.on("beforecopy", function () {
         this.setText(html.val());
     });
     clipHtml.on("aftercopy", afterCopy);
 
     const clipBB = new ZeroClipboard($('#copy-bbcode'));
-    clipBB.on("beforecopy", function (event) {
+    clipBB.on("beforecopy", function () {
         this.setText(bbcode.val());
     });
     clipBB.on("aftercopy", afterCopy);
 
     const clipMD = new ZeroClipboard($('#copy-mdown'));
-    clipMD.on("beforecopy", function (event) {
+    clipMD.on("beforecopy", function () {
         this.setText(mdown.val());
     });
     clipMD.on("aftercopy", afterCopy);
