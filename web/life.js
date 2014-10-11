@@ -4,6 +4,7 @@
 
 const img = $('#badgeImg')
     , code = $('#badgeCode')
+    , badgeCarousel = $('#badgeCarousel')
     , packageIdInput = $('#packageIdInput')
     , html = $('#html')
     , bbcode = $('#bbcode')
@@ -47,7 +48,7 @@ $(function () {
         showError('Aw, Snap! Check the package name and try again');
     });
 
-    $('#badgeCarousel').slick({
+    badgeCarousel.slick({
         infinite: true,
         lazyLoad: 'progressive',
         fade: true,
