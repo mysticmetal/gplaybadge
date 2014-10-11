@@ -22,7 +22,6 @@ $(function () {
             if (imgSrc == null || img.attr('src').indexOf(packageId) < 0) {
                 resetUi();
                 fetchBadge(packageId);
-                packageIdInput.attr('disabled', true);
             } else {
                 showError('Please change package id');
             }
@@ -84,7 +83,7 @@ $(function () {
 });
 
 var resetUi = function () {
-        $('#packageIdInput').attr('disabled', false);
+        packageIdInput.attr('disabled', false);
         buildButton.stop()
     }
     , showError = function (error) {
@@ -103,7 +102,7 @@ var resetUi = function () {
         });
     }
     , fetchBadge = function (packageId) {
-        $('#packageIdInput').attr('disabled', true);
+        packageIdInput.attr('disabled', true);
         buildButton.start();
         code.fadeOut(250);
         img.fadeOut(250, function () {
