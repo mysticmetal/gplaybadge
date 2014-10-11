@@ -53,6 +53,9 @@ $(function () {
         lazyLoad: 'progressive',
         fade: true,
         autoplay: true,
+        onAfterChange: function () {
+            $('link[rel="shortcut icon"]').attr('href', topApps[badgeCarousel.slickCurrentSlide()]['image']);
+        },
         autoplaySpeed: 7000
     });
 
