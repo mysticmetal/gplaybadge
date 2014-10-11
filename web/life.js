@@ -34,14 +34,13 @@ $(function () {
     img.on('load',function () {
         imgSrc = img.attr('src');
         const packageId = packageIdInput.val()
-            , imgUrl = window.location.origin + imgSrc
             , storeUrl = 'https://play.google.com/store/apps/details?id=' + packageId;
 
         img.fadeIn(1000);
         code.fadeIn(1000);
-        html.val('<a href="' + storeUrl + '"><img src="' + imgUrl + '</a>');
-        bbcode.val('[url=' + storeUrl + '][img]' + imgUrl + '[/img][/url]');
-        mdown.val('[![Badge](' + window.location.origin + imgUrl + ')](' + storeUrl + ')');
+        html.val('<a href="' + storeUrl + '"><img src="' + imgSrc + '</a>');
+        bbcode.val('[url=' + storeUrl + '][img]' + imgSrc + '[/img][/url]');
+        mdown.val('[![Badge](' + imgSrc + ')](' + storeUrl + ')');
         resetUi();
     }).on('error', function () {
         imgSrc = null;
