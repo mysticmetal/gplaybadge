@@ -54,6 +54,8 @@ $(function () {
         autoplay: true,
         onAfterChange: function () {
             $('link[rel="shortcut icon"]').attr('href', topApps[badgeCarousel.slickCurrentSlide()]['image']);
+            $('meta[name="twitter:image"]').attr('content', badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id']);
+            $('meta[property="og:image"]').attr('content', badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id']);
         },
         autoplaySpeed: 7000
     });
