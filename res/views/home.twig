@@ -15,13 +15,13 @@
     <meta name="twitter:description" content="Easily create a badge to promote your own Android application in a single step!">
     <meta name="twitter:creator" content="@maxcannamc">
     <!-- Twitter Summary card images must be at least 200x200px -->
-    <meta name="twitter:image" content="{{ app.url_generator.generate('badge') }}?id={{ top_apps[0].id }}">
+    <meta name="twitter:image" content="{{ url('badge') }}?id={{ top_apps[0].id }}">
 
     <!-- Open Graph data -->
     <meta property="og:title" content="gplay.ws" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="{{ app.url_generator.generate('badge') }}" />
-    <meta property="og:image" content="{{ app.url_generator.generate('badge') }}?id={{ top_apps[0].id }}" />
+    <meta property="og:url" content="{{ url('home') }}" />
+    <meta property="og:image" content="{{ url('badge') }}?id={{ top_apps[0].id }}" />
     <meta property="og:description" content="Easily create a badge to promote your own Android application in a single step!" />
     <meta property="og:site_name" content="gplay.ws" />
 
@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/paper/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.1.0/ladda-themeless.min.css">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.6/slick.css">
-    <link rel="stylesheet" type="text/css" href="{{ app.request.basepath }}/style.css">
+    <link rel="stylesheet" type="text/css" href="{{ path('home') }}style.css">
 </head>
 <body>
 <!--
@@ -65,7 +65,7 @@
             <div id="badgeCarousel">
                 {% for top_app in top_apps %}
                     <div>
-                        <img data-lazy="{{ app.url_generator.generate('badge') }}?id={{ top_app.id }}" class="badgeCarouselItem">
+                        <img data-lazy="{{ url('badge') }}?id={{ top_app.id }}" class="badgeCarouselItem">
                     </div>
                 {% endfor %}
             </div>
@@ -219,8 +219,8 @@
 </div>
 
 <script type="text/javascript">
-    const badgePath = '{{ app.url_generator.generate('badge') }}'
-            ,topApps = {{ top_apps|json_encode()|raw }};
+    const badgePath = '{{ url('badge') }}'
+         ,topApps = {{ top_apps|json_encode()|raw }};
 </script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
