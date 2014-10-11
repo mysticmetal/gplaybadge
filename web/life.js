@@ -36,8 +36,9 @@ $(function () {
     });
 
     img.on('load',function () {
+        imgSrc = img.attr('src');
         const packageId = packageIdInput.val()
-            , imgUrl = window.location.origin + img.attr('src')
+            , imgUrl = window.location.origin + imgSrc
             , storeUrl = 'https://play.google.com/store/apps/details?id=' + packageId;
 
         img.fadeIn(1000);
