@@ -49,7 +49,7 @@ $(function () {
 
     $('.badgeCarousel').slick({
         infinite: true,
-        lazyLoad: 'ondemand',
+        lazyLoad: 'progressive',
         fade: true,
         autoplay: true,
         autoplaySpeed: 7000
