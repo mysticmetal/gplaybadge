@@ -80,6 +80,11 @@ $(function () {
         this.setText(mdown.val());
     });
     clipMD.on("aftercopy", afterCopy);
+
+    ZeroClipboard.on("error", function() {
+        code.find('.input-group').removeClass();
+        code.find('.input-group-btn').remove();
+    });
 });
 
 var resetUi = function () {
