@@ -8,7 +8,7 @@ body, html {
     margin-bottom: 100px;
     display: none;
 }
-.badgeCarousel {
+.badgeCarouselItem {
     margin: auto;
     height: 130px
 }

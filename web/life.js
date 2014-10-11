@@ -47,7 +47,7 @@ $(function () {
         showError('Aw, Snap! Check the package name and try again');
     });
 
-    $('.slick').slick({
+    $('.badgeCarousel').slick({
         infinite: true,
         lazyLoad: 'ondemand',
         fade: true,
