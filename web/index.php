@@ -68,7 +68,7 @@ $app['controllers.home'] = $app->share(function() use ($app) {
     return new HomeController($app);
 });
 
-$app['guzzle_ws'] = function () use ($app) {
+$app['guzzle_ws'] = $app->share(function () use ($app) {
     $g = new Client([
         'base_url' => $app['ws.url'],
         'defaults' => [
@@ -82,7 +82,7 @@ $app['guzzle_ws'] = function () use ($app) {
         ]
     ]);
     return $g;
-};
+});
 
 //Routes
 $app->get('/','controllers.home:homeAction')
