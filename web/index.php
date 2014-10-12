@@ -10,6 +10,7 @@ use Silex\Provider\SecurityServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -89,5 +90,5 @@ $app->get('/badge/', 'controllers.badge:badgeAction')
     ->assert('lang', '[a-z]{2}')
     ->value('lang', 'en')
     ->bind('badge');
-
+Request::setTrustedProxies([$_SERVER['REMOTE_ADDR']]);
 $app->run();

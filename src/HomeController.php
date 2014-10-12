@@ -24,9 +24,14 @@ class HomeController
     {
         $topApps = [];
         $guzzle = $this->app['guzzle_ws'];
+        $request = $this->app['request'];
 
         try {
-            $topApps = $guzzle->get('/topFreeApps')->json();
+            $topApps = $guzzle->get('/topFreeApps', [
+                'headers' => [
+                    'X-Forwarded-For' => $request->getClientIp()
+                ]
+            ])->json();
         } catch (ClientException $e) {
             print_r($e->getMessage());
         } catch (RequestException $e) {
