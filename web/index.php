@@ -90,7 +90,6 @@ $app->get('/','controllers.home:homeAction')
 
 $app->get('/badge/', 'controllers.badge:badgeAction')
     ->assert('lang', '[a-z]{2}')
-    ->value('lang', 'en')
     ->bind('badge');
 Request::setTrustedProxies([$_SERVER['REMOTE_ADDR']]);
 $app->run();
