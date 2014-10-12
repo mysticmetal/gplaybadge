@@ -32,3 +32,10 @@ body, html {
     left: 15px;
     right: 15px;
 }
+#help {
+    color: #2196F3;
+}
+#help:hover {
+    color: #428bca;
+    background: white;
+}
