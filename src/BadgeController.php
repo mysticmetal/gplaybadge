@@ -74,9 +74,6 @@ class BadgeController
 
             try {
                 $jsonResponse = $guzzle->get('/applicationDetails', [
-                    'headers' => [
-                        'X-Forwarded-For' => $request->getClientIp()
-                    ],
                     'query' => [
                         'id' => $packageid,
                         'lang' => $lang
