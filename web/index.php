@@ -75,7 +75,7 @@ $app['guzzle_ws'] = function () use ($app) {
             'headers' => [
                 'X-Mashape-User' => $app['ws.user'],
                 'X-Mashape-Subscription' => 'MEGA',
-                'User-Agent' => $app['ws.useragent'],
+                'User-Agent' => $app['request']->headers->get('User-Agent'),
                 $app['ws.auth.header.name'] => $app['ws.auth.header.value']
             ]
         ]
