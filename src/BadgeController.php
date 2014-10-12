@@ -72,12 +72,17 @@ class BadgeController
 
             $img = Image::canvas(450, 130, '#FFFFFF');
 
+            $query = [
+                'id' => $packageid,
+            ];
+
+            if (isset($lang)) {
+                $query['lang'] = $lang;
+            }
+
             try {
                 $jsonResponse = $guzzle->get('/applicationDetails', [
-                    'query' => [
-                        'id' => $packageid,
-                        'lang' => $lang
-                    ]
+                    'query' => $query
                 ])->json();
                 $imgResponse = $guzzle->get($jsonResponse['icon']);
 
