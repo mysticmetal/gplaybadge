@@ -73,14 +73,12 @@ class BadgeController
             $img = Image::canvas(450, 130, '#FFFFFF');
 
             try {
-                $wsResponse = $guzzle->get('/applicationDetails', [
+                $jsonResponse = $guzzle->get('/applicationDetails', [
                     'query' => [
                         'id' => $packageid,
                         'lang' => $lang
                     ]
-                ]);
-
-                $jsonResponse = $wsResponse->json();
+                ])->json();
                 $imgResponse = $guzzle->get($jsonResponse['icon']);
 
                 $img->text("{$jsonResponse['name']} {$jsonResponse['versionName']}", 80, 20, $textStyle);

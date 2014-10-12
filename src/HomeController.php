@@ -13,7 +13,6 @@ use Silex\Application;
 
 class HomeController
 {
-
     protected $app;
 
     public function __construct(Application $app)
