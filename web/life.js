@@ -58,9 +58,15 @@ $(function () {
         touchMove: false,
         accessibility: false,
         onAfterChange: function () {
+            if(imgSrc) {
+                $('meta[name="twitter:image"]').attr('content', imgSrc);
+                $('meta[property="og:image"]').attr('content', imgSrc);
+            } else {
+                const curImgSrc = badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id'];
+                $('meta[name="twitter:image"]').attr('content', curImgSrc);
+                $('meta[property="og:image"]').attr('content', curImgSrc);
+            }
             $('link[rel="shortcut icon"]').attr('href', topApps[badgeCarousel.slickCurrentSlide()]['image']);
-            $('meta[name="twitter:image"]').attr('content', badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id']);
-            $('meta[property="og:image"]').attr('content', badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id']);
         },
         autoplaySpeed: 7000
     });
