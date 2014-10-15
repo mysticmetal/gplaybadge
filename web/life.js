@@ -52,6 +52,11 @@ $(function () {
         lazyLoad: 'progressive',
         fade: true,
         autoplay: true,
+        arrows: false,
+        draggable: false,
+        swipe: false,
+        touchMove: false,
+        accessibility: false,
         onAfterChange: function () {
             $('link[rel="shortcut icon"]').attr('href', topApps[badgeCarousel.slickCurrentSlide()]['image']);
             $('meta[name="twitter:image"]').attr('content', badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id']);
