@@ -29,6 +29,7 @@ class BadgeController
     {
         $request = $this->app['request'];
         $guzzle = $this->app['guzzle_ws'];
+        $utc = new \DateTimeZone('UTC');
 
         $packageid = $request->query->get('id');
         $lang = $request->query->get('lang');
@@ -45,10 +46,10 @@ class BadgeController
             $response->setPrivate();
             $response->setMaxAge(0);
             $response->setSharedMaxAge(0);
-            $response->setExpires(new \DateTime('now', new \DateTimeZone('UTC')));
+            $response->setExpires(new \DateTime('now', $utc));
         } else {
-            $now = new \DateTime('now', new \DateTimeZone('UTC'));
-            $eod = new \DateTime('23:59', new \DateTimeZone('UTC'));
+            $now = new \DateTime('now', $utc);
+            $eod = new \DateTime('23:59', $utc);
 
             $diff = $eod->diff($now);
             $age = $diff->s + ($diff->i + ($diff->h + $diff->d * 24) * 60) * 60;
@@ -56,7 +57,7 @@ class BadgeController
             $response->setMaxAge($age);
             $response->setSharedMaxAge($age);
             $response->setExpires($eod);
-            $response->setLastModified(new \DateTime('midnight', new \DateTimeZone('UTC')));
+            $response->setLastModified(new \DateTime('midnight', $utc));
         }
 
         if ($response->isNotModified($request)) {

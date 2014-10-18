@@ -85,7 +85,7 @@ $app['guzzle_ws'] = $app->share(function () use ($app) {
 });
 
 //Routes
-$app->get('/','controllers.home:homeAction')
+$app->get('/', 'controllers.home:homeAction')
     ->bind('home');
 
 $app->get('/badge/', 'controllers.badge:badgeAction')
