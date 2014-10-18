@@ -201,6 +201,10 @@
     </div>
 </div>
 
+{% if app.debug == false %}
+    {% include  "analytics.twig" %}
+{% endif %}
+
 <script type="text/javascript">
     const badgePath = '{{ url('badge') }}'
          ,topApps = {{ top_apps|json_encode()|raw }};
