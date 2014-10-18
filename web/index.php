@@ -84,6 +84,23 @@ $app['guzzle_ws'] = $app->share(function () use ($app) {
     return $g;
 });
 
+//Error handler
+$app->error(function (\Exception $e, $code) use ($app) {
+    if ($app['debug']) {
+        //return;
+    }
+
+    switch ($code) {
+        case 404:
+            $message = 'Sorry, the page you are looking for could not be found.';
+            break;
+        default:
+            $message = 'We are sorry, but something went terribly wrong.';
+    }
+
+    return $app['twig']->render('error.twig', ['message' => $message]);
+});
+
 //Routes
 $app->get('/', 'controllers.home:homeAction')
     ->bind('home');
