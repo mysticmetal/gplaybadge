@@ -3,13 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Error</title>
 
-    <link href="//fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet" type="text/css">
-    <link href="{{ app.request.basepath }}/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/paper/bootstrap.min.css">
+    <link href="{{ path('home') }}style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-{{ message }}
+<div class="container-fluid text-center container" role="main" id="container">
+    <div class="row">&nbsp;</div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+            <div class="text-center">
+                <a href="{{ path('home') }}">Return to home</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
