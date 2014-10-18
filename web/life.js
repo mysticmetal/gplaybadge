@@ -41,6 +41,9 @@ $(function () {
         html.val('<a href="' + storeUrl + '"><img src="' + imgSrc + '</a>');
         bbcode.val('[url=' + storeUrl + '][img]' + imgSrc + '[/img][/url]');
         mdown.val('[![Badge](' + imgSrc + ')](' + storeUrl + ')');
+        $('meta[name="twitter:image"]').attr('content', imgSrc);
+        $('meta[property="og:image"]').attr('content', imgSrc);
+
         resetUi();
     }).on('error', function () {
         imgSrc = null;
@@ -58,10 +61,7 @@ $(function () {
         touchMove: false,
         accessibility: false,
         onAfterChange: function () {
-            if(imgSrc) {
-                $('meta[name="twitter:image"]').attr('content', imgSrc);
-                $('meta[property="og:image"]').attr('content', imgSrc);
-            } else {
+            if(!imgSrc) {
                 const curImgSrc = badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id'];
                 $('meta[name="twitter:image"]').attr('content', curImgSrc);
                 $('meta[property="og:image"]').attr('content', curImgSrc);
