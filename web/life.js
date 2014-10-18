@@ -41,12 +41,17 @@ $(function () {
         html.val('<a href="' + storeUrl + '"><img src="' + imgSrc + '</a>');
         bbcode.val('[url=' + storeUrl + '][img]' + imgSrc + '[/img][/url]');
         mdown.val('[![Badge](' + imgSrc + ')](' + storeUrl + ')');
+
+        ga('send', 'event', 'badge', 'loaded', packageId);
+
         $('meta[name="twitter:image"]').attr('content', imgSrc);
         $('meta[property="og:image"]').attr('content', imgSrc);
 
         resetUi();
     }).on('error', function () {
+        const packageId = packageIdInput.val();
         imgSrc = null;
+        ga('send', 'event', 'badge', 'error', packageId);
         showError('Aw, Snap! Check the package name and try again');
     });
 
@@ -77,23 +82,27 @@ $(function () {
 
     const clipHtml = new ZeroClipboard($('#copy-html'));
     clipHtml.on("beforecopy", function () {
+        ga('send', 'event', 'code', 'copy', 'html');
         this.setText(html.val());
     });
     clipHtml.on("aftercopy", afterCopy);
 
     const clipBB = new ZeroClipboard($('#copy-bbcode'));
     clipBB.on("beforecopy", function () {
+        ga('send', 'event', 'code', 'copy', 'bbcode');
         this.setText(bbcode.val());
     });
     clipBB.on("aftercopy", afterCopy);
 
     const clipMD = new ZeroClipboard($('#copy-mdown'));
     clipMD.on("beforecopy", function () {
+        ga('send', 'event', 'code', 'copy', 'mdown');
         this.setText(mdown.val());
     });
     clipMD.on("aftercopy", afterCopy);
 
     ZeroClipboard.on("error", function() {
+        ga('send', 'event', 'code', 'copy', 'error');
         code.find('.input-group').removeClass();
         code.find('.input-group-btn').remove();
     });
@@ -108,6 +117,7 @@ var resetUi = function () {
         showMessage(error, true)
     }
     , showMessage = function (message, isError) {
+        ga('send', 'event', 'message', 'show', message, isError ? 1 : 0);
         $.bootstrapGrowl(message, {
             ele: '#container', // which element to append to
             type: isError ? 'danger' : 'success', // (null, 'info', 'danger', 'success')
