@@ -63,25 +63,28 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12">
-            <p>Input your package id, click the button, get the code. Done!</p>
-        </div>
+        <div class="col-md-12">&nbsp;</div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <form id="createBadgeForm" class="form-inline">
-                <div class="form-group col-md-4 col-md-offset-4" id="createBadgeFormGroup">
-                    <div class="input-group">
-                        <span class="input-group-btn">
-                            <a class="btn btn-default" data-toggle="modal" data-target="#helpModal" title="Help" id="help">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="form-group" id="createBadgeFormGroup">
+                        <label for="createBadgeFormGroup">Input your package id, click the button, get the code. Done!</label>
+                        <div class="input-group">
+                        <span class="input-group-addon">
+                            <a href="#" data-toggle="modal" data-target="#helpModal" title="Help">
                                 <span class="glyphicon glyphicon-question-sign"></span>
                             </a>
                         </span>
-                        <input class="form-control" placeholder="app package id" id="packageIdInput" autocomplete="off">
+                        <input class="form-control" placeholder="app package id" id="packageIdInput" autocomplete="off" type="text">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary ladda-button" data-style="zoom-in" id="buildButton"><span class="ladda-label">Build my badge!</span></button>
+                            <button type="submit" class="btn btn-primary ladda-button" data-style="zoom-in" id="buildButton">
+                                <span class="ladda-label">Build my badge!</span>
+                            </button>
                         </span>
+                        </div>
                     </div>
                 </div>
             </form>
