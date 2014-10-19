@@ -25,6 +25,9 @@ class BadgeController
         $this->fontColor = '#2196F3';
     }
 
+    /**
+     * @return Response
+     */
     public function badgeAction()
     {
         $request = $this->app['request'];
