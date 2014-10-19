@@ -202,9 +202,7 @@
     </div>
 </div>
 
-{% if app.debug == false %}
-    {% include  "analytics.twig" %}
-{% endif %}
+{% include "analytics.twig" %}
 
 <script type="text/javascript">
     const badgePath = '{{ url('badge') }}'
