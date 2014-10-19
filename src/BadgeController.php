@@ -12,17 +12,24 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Response;
 
+const FONT_COLOR_HEAD = '#000000';
+const FONT_COLOR_FIELD = '#666666';
+const FONT_COLOR_PRICE = '#FFFFFF';
+const FONT_SIZE_HEAD = 16;
+const FONT_SIZE_FIELD = 14;
+const FONT_SIZE_WATERMARK = 9;
+const ICON_SIZE = 64;
+const MARGIN = 10;
+const FONT_FILE_PATH = __DIR__ . '/../res/fonts/Roboto-Regular.ttf';
+const BACKGROUND_FILE_PATH = __DIR__ . '/../res/images/badge_bg.png';
+
 class BadgeController
 {
     protected $app;
-    private $fontFilePath;
-    private $fontColor;
 
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->fontFilePath = __DIR__ . '/../res/fonts/Roboto-Regular.ttf';
-        $this->fontColor = '#2196F3';
     }
 
     /**
