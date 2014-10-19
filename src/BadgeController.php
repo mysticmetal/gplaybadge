@@ -76,38 +76,83 @@ class BadgeController
             //Se devo scaricare l'img
             $wsResponse = null;
 
-            $textStyle = function ($font) {
-                $font->file($this->fontFilePath);
-                $font->color($this->fontColor);
+            /** @var $font \Intervention\Image\AbstractFont */
+            $textStyleHead = function ($font) {
+                $font->file(FONT_FILE_PATH);
+                $font->color(FONT_COLOR_HEAD);
+                $font->size(FONT_SIZE_HEAD);
+                $font->align('left');
+                $font->valign('top');
             };
 
-            $img = Image::canvas(450, 130, '#FFFFFF');
+            /** @var $font \Intervention\Image\AbstractFont */
+            $textStyleField = function ($font) {
+                $font->file(FONT_FILE_PATH);
+                $font->color(FONT_COLOR_FIELD);
+                $font->size(FONT_SIZE_FIELD);
+                $font->align('left');
+                $font->valign('top');
+            };
 
-            $query = [
-                'id' => $packageid,
-            ];
+            /** @var $font \Intervention\Image\AbstractFont */
+            $textStyleWatermark = function ($font) {
+                $font->file(FONT_FILE_PATH);
+                $font->color(FONT_COLOR_FIELD);
+                $font->size(FONT_SIZE_WATERMARK);
+                $font->align('right');
+                $font->valign('bottom');
+            };
 
-            if (isset($lang)) {
-                $query['lang'] = $lang;
-            }
+            /** @var $font \Intervention\Image\AbstractFont */
+            $textStylePrice = function ($font) {
+                $font->file(FONT_FILE_PATH);
+                $font->color(FONT_COLOR_PRICE);
+                $font->size(FONT_SIZE_FIELD);
+                $font->align('center');
+                $font->valign('top');
+            };
+
+            /** @var $img \Intervention\Image\Image */
+            $img = Image::make(BACKGROUND_FILE_PATH);
+
+            $img->text($request->getHost(), $img->getWidth() - 1.5 * MARGIN,
+                $img->getHeight() - 1.5 * MARGIN, $textStyleWatermark);
 
             try {
-                $jsonResponse = $guzzle->get('/applicationDetails', [
-                    'query' => $query
+                $appDetail = $guzzle->get('/applicationDetails', [
+                    'query' => [
+                        'id' => $packageid,
+                        'lang' => $lang
+                    ]
                 ])->json();
-                $imgResponse = $guzzle->get($jsonResponse['icon']);
 
-                $img->text("{$jsonResponse['name']} {$jsonResponse['versionName']}", 80, 20, $textStyle);
-                $img->text("by {$jsonResponse['author']}", 80, 40, $textStyle);
-                $img->text("{$jsonResponse['rating']['display']}/5.0 (" . number_format($jsonResponse['rating']['count']) . " ratings)", 80, 60, $textStyle);
-                $img->text("{$jsonResponse['numDownloads']} downloads", 80, 80, $textStyle);
-                $img->text("Published {$jsonResponse['datePublished']}", 80, 100, $textStyle);
-                $img->insert(Image::make($imgResponse->getBody()->__toString())->resize(64, 64), 'top-left', 10, 10);
-                $img->text("gplay.ws", 410, 125); //TODO Customize this text style
+                if (strlen($appDetail['name']) > 35) {
+                    $appDetail['name'] = substr($appDetail['name'], 0, 30) . '...';
+                }
+
+                $img->insert(Image::make($appDetail['icon'])->resize(ICON_SIZE, ICON_SIZE), 'top-left',
+                    1.2 * MARGIN, 1.5 * MARGIN);
+
+                $img->text($appDetail['name'], ICON_SIZE + 2 * MARGIN, 1.5 * MARGIN, $textStyleHead);
+
+                $img->text("by {$appDetail['author']}\n" .
+                    $appDetail['rating']['display'] . "/5.0 " .
+                    "(" . number_format($appDetail['rating']['count']) . " ratings)\n" .
+                    $appDetail['numDownloads'] . " downloads\n" .
+                    "Last updated " . strtolower($appDetail['datePublished']),
+                    ICON_SIZE + 2 * MARGIN, 35, $textStyleField);
+
+                $img->text($appDetail['price'] > 0 ?
+                        $appDetail['currency'] . " " . number_format($appDetail['price'], 2) : 'FREE',
+                    $img->getWidth() - 50, 2 * MARGIN, $textStylePrice);
 
             } catch (RequestException $e) {
-                $this->app->abort($e->getCode(), 'Error generating image');
+                $this->app->abort($e->getCode(), 'Error getting image data');
                 return false;
+            } catch (\Exception $e) {
+                $img->text('Error generating image', ICON_SIZE + 2 * MARGIN,
+                    $img->getHeight() - 1.5 * MARGIN, $textStyleField);
+                $response->setStatusCode(500);
             }
 
             $response->setContent($img->encode('png'));
