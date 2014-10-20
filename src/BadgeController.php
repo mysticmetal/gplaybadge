@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 const FONT_COLOR_HEAD = '#000000';
 const FONT_COLOR_FIELD = '#666666';
 const FONT_COLOR_PRICE = '#FFFFFF';
-const FONT_SIZE_HEAD = 16;
+const FONT_SIZE_HEAD = 18;
 const FONT_SIZE_FIELD = 14;
 const FONT_SIZE_WATERMARK = 9;
 const ICON_SIZE = 64;
@@ -140,7 +140,7 @@ class BadgeController
                     "(" . number_format($appDetail['rating']['count']) . " ratings)\n" .
                     $appDetail['numDownloads'] . " downloads\n" .
                     "Last updated " . strtolower($appDetail['datePublished']),
-                    ICON_SIZE + 2 * MARGIN, 35, $textStyleField);
+                    ICON_SIZE + 2 * MARGIN, 40, $textStyleField);
 
                 $img->text($appDetail['price'] > 0 ?
                         $appDetail['currency'] . " " . number_format($appDetail['price'], 2) : 'FREE',
