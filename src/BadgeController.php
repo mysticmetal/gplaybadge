@@ -76,7 +76,7 @@ class BadgeController
             //Se devo scaricare l'img
             $wsResponse = null;
 
-            /** @var $font \Intervention\Image\AbstractFont */
+            /** @var \Intervention\Image\AbstractFont $font */
             $textStyleHead = function ($font) {
                 $font->file(FONT_FILE_PATH);
                 $font->color(FONT_COLOR_HEAD);
@@ -85,7 +85,7 @@ class BadgeController
                 $font->valign('top');
             };
 
-            /** @var $font \Intervention\Image\AbstractFont */
+            /** @var \Intervention\Image\AbstractFont $font */
             $textStyleField = function ($font) {
                 $font->file(FONT_FILE_PATH);
                 $font->color(FONT_COLOR_FIELD);
@@ -94,7 +94,7 @@ class BadgeController
                 $font->valign('top');
             };
 
-            /** @var $font \Intervention\Image\AbstractFont */
+            /** @var \Intervention\Image\AbstractFont $font */
             $textStyleWatermark = function ($font) {
                 $font->file(FONT_FILE_PATH);
                 $font->color(FONT_COLOR_FIELD);
@@ -103,7 +103,7 @@ class BadgeController
                 $font->valign('bottom');
             };
 
-            /** @var $font \Intervention\Image\AbstractFont */
+            /** @var \Intervention\Image\AbstractFont $font */
             $textStylePrice = function ($font) {
                 $font->file(FONT_FILE_PATH);
                 $font->color(FONT_COLOR_PRICE);
@@ -112,7 +112,7 @@ class BadgeController
                 $font->valign('top');
             };
 
-            /** @var $img \Intervention\Image\Image */
+            /** @var \Intervention\Image\Image $img */
             $img = Image::make(BACKGROUND_FILE_PATH);
 
             $img->text($request->getHost(), $img->getWidth() - 1.5 * MARGIN,
