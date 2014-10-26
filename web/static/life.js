@@ -117,11 +117,11 @@ $(function () {
 
 var resetUi = function () {
         packageIdInput.attr('disabled', false);
-        buildButton.stop()
+        buildButton.stop();
     }
     , showError = function (error) {
         resetUi();
-        showMessage(error, true)
+        showMessage(error, true);
     }
     , showMessage = function (message, isError) {
         ga('send', 'event', 'message', 'show', message, isError ? 1 : 0);
