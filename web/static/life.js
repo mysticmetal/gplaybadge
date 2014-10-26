@@ -27,7 +27,7 @@ $(function () {
                 showError('Again!?');
             }
         } else {
-            showError('Unfortunately I couldn\'t read your mind');
+            showError('Unfortunately I couldn\'t read your mind :)');
         }
     });
 
