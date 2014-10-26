@@ -9,10 +9,11 @@ body, html {
     max-width : 450px;
 }
 #badgeCode {
-    margin-bottom: 100px;
+    margin-bottom: 25px;
     display: none;
 }
 #badgeCarousel {
+    max-height: 100%;
     max-width: 450px;
     margin: auto;
 }
