@@ -226,7 +226,7 @@
     </div>
 </div>
 
-{% include "analytics.twig" %}
+{% include app.debug ? 'analytics.twig' : 'analytics.min.twig' %}
 
 <script type="text/javascript">
     const badgePath = '{{ url('badge') }}',topApps = {{ top_apps|json_encode()|raw }};
