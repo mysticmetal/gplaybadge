@@ -106,6 +106,13 @@ $(function () {
         code.find('.input-group').removeClass();
         code.find('.input-group-btn').remove();
     });
+
+    $('.modal').on('shown.bs.modal', function () {
+        ga('send', 'event', 'modal', 'shown', this.id);
+    }).on('hidden.bs.modal', function () {
+        ga('send', 'event', 'modal', 'hidden', this.id);
+    });
+
 });
 
 var resetUi = function () {
