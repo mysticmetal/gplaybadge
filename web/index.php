@@ -87,7 +87,7 @@ $app['guzzle_ws'] = $app->share(function () use ($app) {
 //Error handler
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
-        //return;
+        return;
     }
 
     switch ($code) {
