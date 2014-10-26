@@ -109,6 +109,8 @@ $app->get('/badge/', 'controllers.badge:badgeAction')
     ->assert('lang', '[a-z]{2}')
     ->bind('badge');
 
+$app->get('/favicon.ico', 'controllers.home:faviconAction');
+
 //Enable heroku reverse proxy
 if ($app['debug']) {
     Request::setTrustedProxies([$_SERVER['REMOTE_ADDR']]);

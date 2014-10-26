@@ -28,9 +28,11 @@ class HomeController
         try {
             $topApps = $guzzle->get('/topFreeApps')->json();
         } catch (ClientException $e) {
-            print_r($e->getMessage());
+            $this->app['monolog']->addError($e->getMessage());
+            $this->app->abort(500);
         } catch (RequestException $e) {
-            print_r($e->getMessage());
+            $this->app['monolog']->addError($e->getMessage());
+            $this->app->abort(500);
         }
 
         array_splice($topApps, 10);
@@ -40,4 +42,25 @@ class HomeController
             'top_apps' => $topApps
         ]);
     }
-} 
+
+    public function faviconAction()
+    {
+        $topApps = [];
+        $guzzle = $this->app['guzzle_ws'];
+
+        try {
+            $topApps = $guzzle->get('/topFreeApps')->json();
+        } catch (ClientException $e) {
+            $this->app['monolog']->addError($e->getMessage());
+            $this->app->abort(500);
+        } catch (RequestException $e) {
+            $this->app['monolog']->addError($e->getMessage());
+            $this->app->abort(500);
+        }
+
+        shuffle($topApps);
+        array_splice($topApps, 1);
+
+        return $this->app->redirect($topApps[0]['image']);
+    }
+}
