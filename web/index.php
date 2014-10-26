@@ -110,6 +110,8 @@ $app->get('/badge/', 'controllers.badge:badgeAction')
     ->bind('badge');
 
 $app->get('/favicon.ico', 'controllers.home:faviconAction');
+$app->get('/apple-touch-icon{modifier}.png', 'controllers.home:faviconAction')
+    ->assert('modifier', '(-.*)*');
 
 //Enable heroku reverse proxy
 if ($app['debug']) {
