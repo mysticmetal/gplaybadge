@@ -119,13 +119,13 @@ var resetUi = function () {
     , showMessage = function (message, isError) {
         ga('send', 'event', 'message', 'show', message, isError ? 1 : 0);
         $.bootstrapGrowl(message, {
-            ele: '#container', // which element to append to
-            type: isError ? 'danger' : 'success', // (null, 'info', 'danger', 'success')
-            align: 'center', // ('left', 'right', or 'center')
-            width: 'auto', // (integer, or 'auto')
-            delay: 4000, // Time while the message will be displayed. It's not equivalent to the *demo* timeOut!
-            allow_dismiss: false, // If true then will display a cross to close the popup.
-            stackup_spacing: 10 // spacing between consecutively stacked growls.
+            ele: '#container',
+            type: isError ? 'danger' : 'success',
+            align: 'center',
+            width: 'auto',
+            delay: 4000,
+            allow_dismiss: false,
+            stackup_spacing: 10
         });
     }
     , fetchBadge = function (packageId) {
