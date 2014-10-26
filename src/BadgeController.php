@@ -115,8 +115,12 @@ class BadgeController
             /** @var \Intervention\Image\Image $img */
             $img = Image::make(BACKGROUND_FILE_PATH);
 
-            $img->text($request->getHost(), $img->getWidth() - 1.5 * MARGIN,
-                $img->getHeight() - 1.5 * MARGIN, $textStyleWatermark);
+            $img->text(
+                $request->getHost(),
+                $img->getWidth() - 1.5 * MARGIN,
+                $img->getHeight() - 1.5 * MARGIN,
+                $textStyleWatermark
+            );
 
             try {
                 $appDetail = $guzzle->get('/applicationDetails', [
@@ -130,28 +134,43 @@ class BadgeController
                     $appDetail['name'] = substr($appDetail['name'], 0, 30) . '...';
                 }
 
-                $img->insert(Image::make($appDetail['icon'])->resize(ICON_SIZE, ICON_SIZE), 'top-left',
-                    1.2 * MARGIN, 1.5 * MARGIN);
+                $img->insert(
+                    Image::make($appDetail['icon'])->resize(ICON_SIZE, ICON_SIZE),
+                    'top-left',
+                    1.2 * MARGIN,
+                    1.5 * MARGIN
+                );
 
                 $img->text($appDetail['name'], ICON_SIZE + 2 * MARGIN, 1.5 * MARGIN, $textStyleHead);
 
-                $img->text("by {$appDetail['author']}\n" .
+                $img->text(
+                    "by {$appDetail['author']}\n" .
                     $appDetail['rating']['display'] . "/5.0 " .
                     "(" . number_format($appDetail['rating']['count']) . " ratings)\n" .
                     $appDetail['numDownloads'] . " downloads\n" .
                     "Last updated " . strtolower($appDetail['datePublished']),
-                    ICON_SIZE + 2 * MARGIN, 40, $textStyleField);
+                    ICON_SIZE + 2 * MARGIN,
+                    40,
+                    $textStyleField
+                );
 
-                $img->text($appDetail['price'] > 0 ?
-                        $appDetail['currency'] . " " . number_format($appDetail['price'], 2) : 'FREE',
-                    $img->getWidth() - 50, 2 * MARGIN, $textStylePrice);
+                $img->text(
+                    $appDetail['price'] > 0 ? $appDetail['currency']." ".number_format($appDetail['price'], 2) : 'FREE',
+                    $img->getWidth() - 50,
+                    2 * MARGIN,
+                    $textStylePrice
+                );
 
             } catch (RequestException $e) {
                 $this->app->abort($e->getCode(), 'Error getting image data');
                 return false;
             } catch (\Exception $e) {
-                $img->text('Error generating image', ICON_SIZE + 2 * MARGIN,
-                    $img->getHeight() - 1.5 * MARGIN, $textStyleField);
+                $img->text(
+                    'Error generating image',
+                    ICON_SIZE + 2 * MARGIN,
+                    $img->getHeight() - 1.5 * MARGIN,
+                    $textStyleField
+                );
                 $response->setStatusCode(500);
             }
 

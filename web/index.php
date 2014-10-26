@@ -51,7 +51,7 @@ $app->register(new UrlGeneratorServiceProvider());
 
 $app->register(new SecurityServiceProvider(), $app['security.firewalls']);
 
-$app['security.encoder.digest'] = $app->share(function() {
+$app['security.encoder.digest'] = $app->share(function () {
     return new MessageDigestPasswordEncoder('sha256', false, 1);
 });
 
@@ -60,11 +60,11 @@ $app['ws.auth.header.value'] = getenv('MASHAPE_KEY');
 $app['ws.url'] = 'https://gplaystore.p.mashape.com/applicationDetails';
 $app['ws.useragent'] = 'gplay.ws/1.0';
 
-$app['controllers.badge'] = $app->share(function() use ($app) {
+$app['controllers.badge'] = $app->share(function () use ($app) {
     return new BadgeController($app);
 });
 
-$app['controllers.home'] = $app->share(function() use ($app) {
+$app['controllers.home'] = $app->share(function () use ($app) {
     return new HomeController($app);
 });
 
