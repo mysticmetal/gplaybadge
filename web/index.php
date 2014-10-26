@@ -95,6 +95,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
             $message = 'Sorry, the page you are looking for could not be found.';
             break;
         default:
+            $app['monolog']->addError($e->getMessage());
             $message = 'We are sorry, but something went terribly wrong.';
     }
 
