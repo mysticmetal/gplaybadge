@@ -55,7 +55,7 @@ $(function () {
         showError('Aw, Snap! Check the package name and try again');
     });
 
-    badgeCarousel.slick({
+    $('#badgeCarousel').slick({
         infinite: true,
         lazyLoad: 'progressive',
         fade: true,
