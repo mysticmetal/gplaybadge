@@ -65,13 +65,13 @@ $(function () {
         swipe: false,
         touchMove: false,
         accessibility: false,
-        onAfterChange: function () {
+        onAfterChange: function (slide, index) {
             if(!imgSrc) {
-                const curImgSrc = badgePath + '?id=' + topApps[badgeCarousel.slickCurrentSlide()]['id'];
+                const curImgSrc = badgePath + '?id=' + topApps[index]['id'];
                 $('meta[name="twitter:image"]').attr('content', curImgSrc);
                 $('meta[property="og:image"]').attr('content', curImgSrc);
             }
-            $('link[rel="shortcut icon"]').attr('href', topApps[badgeCarousel.slickCurrentSlide()]['image']);
+            $('link[rel="shortcut icon"]').attr('href', topApps[index]['image']);
         },
         autoplaySpeed: 7000
     });
