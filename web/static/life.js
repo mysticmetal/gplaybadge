@@ -2,17 +2,15 @@
  * Created by massimilianocannarozzo on 21/06/14.
  */
 
-const img = $('#badgeImg')
-    , code = $('#badgeCode')
-    , badgeCarousel = $('#badgeCarousel')
-    , packageIdInput = $('#packageIdInput')
-    , html = $('#html')
-    , bbcode = $('#bbcode')
-    , mdown = $('#mdown');
-var buildButton;
+var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton;
 
 $(function () {
-    var imgSrc;
+    img = $('#badgeImg');
+    code = $('#badgeCode');
+    packageIdInput = $('#packageIdInput');
+    html = $('#html');
+    bbcode = $('#bbcode');
+    mdown = $('#mdown');
 
     $('#buildButton').click(function (event) {
         const packageId = packageIdInput.val();
