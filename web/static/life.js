@@ -124,7 +124,7 @@ var resetUi = function () {
     , showMessage = function (message, isError) {
         ga('send', 'event', 'message', 'show', message, isError ? 1 : 0);
         $.bootstrapGrowl(message, {
-            ele: '#container',
+            ele: '#growlAnchor',
             type: isError ? 'danger' : 'success',
             align: 'center',
             width: 'auto',
