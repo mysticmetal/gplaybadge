@@ -35,7 +35,7 @@ h2 {
 .container[role=main] {
     min-height:100%;
 }
-.bottombar {
+#bottombar {
     height: 25px;
     margin-top: -25px;
     left: 15px;
