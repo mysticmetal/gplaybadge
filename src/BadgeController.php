@@ -134,6 +134,10 @@ class BadgeController
                     $appDetail['name'] = substr($appDetail['name'], 0, 30) . '...';
                 }
 
+                if (strlen($appDetail['author']) > 35) {
+                    $appDetail['author'] = substr($appDetail['author'], 0, 30) . '...';
+                }
+
                 $img->insert(
                     Image::make($appDetail['icon'])->resize(ICON_SIZE, ICON_SIZE),
                     'top-left',
