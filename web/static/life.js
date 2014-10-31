@@ -2,7 +2,7 @@
  * Created by massimilianocannarozzo on 21/06/14.
  */
 
-var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton;
+var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton, startTime;
 
 $(function () {
     img = $('#badgeImg');
@@ -20,6 +20,7 @@ $(function () {
         if (packageId) {
             if (imgSrc == null || img.attr('src').indexOf(packageId) < 0) {
                 resetUi();
+                startTime = new Date().getTime();
                 fetchBadge(packageId);
             } else {
                 showError('Again!?');
@@ -41,6 +42,7 @@ $(function () {
         mdown.val('[![Badge](' + imgSrc + ')](' + storeUrl + ')');
 
         ga('send', 'event', 'badge', 'loaded', packageId);
+        ga('send', 'timing', 'badge', 'loaded', new Date().getTime() - startTime, packageId);
 
         $('meta[name="twitter:image"]').attr('content', imgSrc);
         $('meta[property="og:image"]').attr('content', imgSrc);
@@ -50,6 +52,7 @@ $(function () {
         const packageId = packageIdInput.val();
         imgSrc = null;
         ga('send', 'event', 'badge', 'error', packageId);
+        ga('send', 'timing', 'badge', 'error', new Date().getTime() - startTime, packageId);
         showError('Aw, Snap! Check the package name and try again');
     });
 
