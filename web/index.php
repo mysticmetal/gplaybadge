@@ -49,7 +49,7 @@ $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new UrlGeneratorServiceProvider());
 
-$app->register(new SecurityServiceProvider(), $app['security.firewalls']);
+//$app->register(new SecurityServiceProvider(), $app['security.firewalls']);
 
 $app['security.encoder.digest'] = $app->share(function () {
     return new MessageDigestPasswordEncoder('sha256', false, 1);
