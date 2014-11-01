@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,17 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@maxcannamc">
-    <meta name="twitter:title" content="gplay.ws">
-    <meta name="twitter:description" content="Easily create a badge to promote your own Android application in a single step!">
     <meta name="twitter:creator" content="@maxcannamc">
-    <meta name="twitter:image" content="{{ url('badge') }}?id={{ top_apps[0].id }}">
 
-    <meta property="og:title" content="gplay.ws" />
+    <meta property="og:title" itemprop="name" content="gplay.ws" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ url('home') }}" />
     <meta property="og:image" content="{{ url('badge') }}?id={{ top_apps[0].id }}" />
-    <meta property="og:description" content="Easily create a badge to promote your own Android application in a single step!" />
+    <meta property="og:description" itemprop="description" content="Easily create a badge to promote your own Android application in a single step!" />
     <meta property="og:site_name" content="gplay.ws" />
 
     <link rel="shortcut icon" type="image/png" href="{{ top_apps[0].image }}" />
