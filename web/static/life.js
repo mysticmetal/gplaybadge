@@ -4,7 +4,7 @@
 
 var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton, startTime;
 
-$(function () {
+$(window).load(function () {
     img = $('#badgeImg');
     code = $('#badgeCode');
     packageIdInput = $('#packageIdInput');
