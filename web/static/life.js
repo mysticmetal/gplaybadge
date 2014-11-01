@@ -5,7 +5,6 @@
 var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton, startTime;
 
 $(window).load(function () {
-    img = $('#badgeImg');
     code = $('#badgeCode');
     packageIdInput = $('#packageIdInput');
     html = $('#html');
@@ -30,7 +29,11 @@ $(window).load(function () {
         }
     });
 
-    img.on('load',function () {
+    $('#badgeDiv').append('<img id="badgeImg">');
+
+    img = $('#badgeImg');
+    img.hide()
+        .on('load',function () {
         imgSrc = img.attr('src');
         const packageId = packageIdInput.val()
             , storeUrl = 'https://play.google.com/store/apps/details?id=' + packageId;
@@ -56,7 +59,15 @@ $(window).load(function () {
         showError('Aw, Snap! Check the package name and try again');
     });
 
-    $('#badgeCarousel').slick({
+    const carousel = $('#badgeCarousel');
+
+    topApps.forEach(function (app) {
+        carousel.append('<div> <img data-lazy="' +
+        badgePath + '?id=' + app.id +
+        '" class="badgeCarouselItem"> </div>')
+    });
+
+    carousel.slick({
         infinite: true,
         lazyLoad: 'progressive',
         fade: true,
