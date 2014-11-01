@@ -47,7 +47,6 @@ $(window).load(function () {
         ga('send', 'event', 'badge', 'loaded', packageId);
         ga('send', 'timing', 'badge', 'loaded', new Date().getTime() - startTime, packageId);
 
-        $('meta[name="twitter:image"]').attr('content', imgSrc);
         $('meta[property="og:image"]').attr('content', imgSrc);
 
         resetUi();
@@ -61,7 +60,10 @@ $(window).load(function () {
 
     const carousel = $('#badgeCarousel');
 
-    topApps.forEach(function (app) {
+    topApps.forEach(function (app, index) {
+        if (index == 0) {
+            return;
+        }
         carousel.append('<div> <img data-lazy="' +
         badgePath + '?id=' + app.id +
         '" class="badgeCarouselItem"> </div>')
@@ -69,7 +71,7 @@ $(window).load(function () {
 
     carousel.slick({
         infinite: true,
-        lazyLoad: 'progressive',
+        lazyLoad: 'ondemand',
         fade: true,
         autoplay: true,
         arrows: false,
@@ -78,11 +80,6 @@ $(window).load(function () {
         touchMove: false,
         accessibility: false,
         onAfterChange: function (slide, index) {
-            if(!imgSrc) {
-                const curImgSrc = badgePath + '?id=' + topApps[index]['id'];
-                $('meta[name="twitter:image"]').attr('content', curImgSrc);
-                $('meta[property="og:image"]').attr('content', curImgSrc);
-            }
             $('link[rel="shortcut icon"]').attr('href', topApps[index]['image']);
         },
         autoplaySpeed: 7000
