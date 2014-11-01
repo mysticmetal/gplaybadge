@@ -131,11 +131,11 @@ class BadgeController
                     ]
                 ])->json();
 
-                if (strlen($appDetail['name']) > 35) {
+                if (strlen($appDetail['name']) > 33) {
                     $appDetail['name'] = substr($appDetail['name'], 0, 30) . '...';
                 }
 
-                if (strlen($appDetail['author']) > 35) {
+                if (strlen($appDetail['author']) > 33) {
                     $appDetail['author'] = substr($appDetail['author'], 0, 30) . '...';
                 }
 
