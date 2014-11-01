@@ -22,6 +22,7 @@ const ICON_SIZE = 64;
 const MARGIN = 10;
 const FONT_FILE_PATH = __DIR__ . '/../res/fonts/Roboto-Regular.ttf';
 const BACKGROUND_FILE_PATH = __DIR__ . '/../res/images/badge_bg.png';
+const MIMETYPE = 'image/png';
 
 class BadgeController
 {
@@ -178,8 +179,8 @@ class BadgeController
                 $response->setStatusCode(500);
             }
 
-            $response->setContent($img->encode('png'));
-            $response->headers->set('Content-Type', 'image/png');
+            $response->setContent($img->encode(MIMETYPE));
+            $response->headers->set('Content-Type', MIMETYPE);
         }
         
         return $response;
