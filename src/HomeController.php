@@ -10,6 +10,7 @@ namespace GPlayInfo;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Response;
 
 class HomeController
 {
@@ -38,9 +39,12 @@ class HomeController
         shuffle($topApps);
         array_splice($topApps, 5);
 
-        return $this->app['twig']->render($this->app['debug'] ? 'home.twig' : 'home.min.twig', [
+        return (new Response($this->app['twig']->render($this->app['debug'] ? 'home.twig' : 'home.min.twig', [
             'top_apps' => $topApps
-        ]);
+        ])))
+            ->setExpires(new \DateTime('now +1 day'))
+            ->setMaxAge(24 * 60 * 60)
+            ->setSharedMaxAge(24 * 60 * 60);
     }
 
     public function faviconAction()
