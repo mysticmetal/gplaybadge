@@ -35,8 +35,8 @@ class HomeController
             $this->app->abort(500);
         }
 
-        array_splice($topApps, 10);
         shuffle($topApps);
+        array_splice($topApps, 5);
 
         return $this->app['twig']->render($this->app['debug'] ? 'home.twig' : 'home.min.twig', [
             'top_apps' => $topApps
@@ -59,7 +59,6 @@ class HomeController
         }
 
         shuffle($topApps);
-        array_splice($topApps, 1);
 
         return $this->app->redirect($topApps[0]['image']);
     }
