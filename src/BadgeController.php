@@ -10,6 +10,7 @@ namespace GPlayInfo;
 use GuzzleHttp\Exception\RequestException;
 use Intervention\Image\ImageManagerStatic as Image;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Response;
 
 const FONT_COLOR_HEAD = '#000000';
@@ -42,8 +43,11 @@ class BadgeController
         $guzzle = $this->app['guzzle_ws'];
         $utc = new \DateTimeZone('UTC');
 
-        $packageid = $request->query->get('id');
-        $lang = $request->query->get('lang');
+        /** @var ParameterBag $query */
+        $query = $request->query;
+
+        $packageid = $query->get('id');
+        $lang = $query->has('lang') ? $query->get('lang') : 'en';
 
         if (!isset($packageid)) {
             $this->app->abort(400, 'Missing package id');
