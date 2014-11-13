@@ -46,13 +46,13 @@ class BadgeController
         /** @var ParameterBag $query */
         $query = $request->query;
 
-        $packageid = $query->get('id');
-        $lang = $query->has('lang') ? $query->get('lang') : 'en';
-
-        if (!isset($packageid)) {
+        if (!$query->has('id')) {
             $this->app->abort(400, 'Missing package id');
             return null;
         }
+
+        $packageid = $query->get('id');
+        $lang = $query->has('lang') ? $query->get('lang') : 'en';
 
         $response = new Response();
 
