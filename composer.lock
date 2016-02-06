@@ -1116,7 +1116,7 @@
     "prefer-lowest": false,
     "platform": {
         "ext-imagick": "*",
-        "php": "~7.0.0"
+        "php": "^5.6.16"
     },
     "platform-dev": []
 }
