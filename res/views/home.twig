@@ -220,7 +220,7 @@
 {% include app.debug ? 'analytics.twig' : 'analytics.min.twig' %}
 
 <script type="text/javascript">
-    const badgePath = '{{ url('badge') }}',topApps = {{ top_apps|json_encode()|raw }};
+    const badgePath = '{{ url('badge', [], true) }}',topApps = {{ top_apps|json_encode()|raw }};
 </script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>

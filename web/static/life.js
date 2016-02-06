@@ -65,8 +65,9 @@ $(window).load(function () {
             return;
         }
         carousel.append('<div> <img data-lazy="' +
-        badgePath + '?id=' + app.id +
-        '" class="badgeCarouselItem"> </div>')
+            location.protocol +
+            badgePath + '?id=' + app.id +
+            '" class="badgeCarouselItem"> </div>')
     });
 
     carousel.slick({
@@ -149,6 +150,6 @@ var resetUi = function () {
         buildButton.start();
         code.fadeOut(250);
         img.fadeOut(250, function () {
-            img.attr('src', badgePath + '?id=' + packageId);
+            img.attr('src', location.protocol + badgePath + '?id=' + packageId);
         });
     };
