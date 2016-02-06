@@ -10,7 +10,6 @@
         "intervention/image": "~2.0.0",
         "symfony/security": "~2.5.0",
         "ext-imagick": "*",
-        "hhvm": "~3.5",
         "php": "~7.0.0"
     },
     "autoload": {

@@ -1,3 +1,5 @@
+[ ![Codeship Status for mcannarozzo/gplay.ws](https://codeship.com/projects/aae89ac0-af0d-0133-5e4c-6624307c89c5/status?branch=master)](https://codeship.com/projects/132459)
+
 # gplay.ws #
 
 *Easily create a badge to promote your own android application in a single step!*
