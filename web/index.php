@@ -38,8 +38,7 @@ $app['security.encoder.digest'] = $app->share(function () {
 
 $app['ws.auth.header.name'] = 'X-Mashape-Key';
 $app['ws.auth.header.value'] = getenv('MASHAPE_KEY');
-$app['ws.url'] = 'https://gplaystore.p.mashape.com/applicationDetails';
-$app['ws.useragent'] = 'gplay.ws/1.0';
+$app['ws.url'] = 'https://gplaystore.p.mashape.com';
 
 $app['controllers.badge'] = $app->share(function () use ($app) {
     return new BadgeController($app);
@@ -54,8 +53,6 @@ $app['guzzle_ws'] = $app->share(function () use ($app) {
         'base_url' => $app['ws.url'],
         'defaults' => [
             'headers' => [
-                'X-Mashape-User' => $app['ws.user'],
-                'X-Mashape-Subscription' => 'MEGA',
                 'X-Forwarded-For' => $app['request']->getClientIp(),
                 'User-Agent' => $app['request']->headers->get('User-Agent'),
                 $app['ws.auth.header.name'] => $app['ws.auth.header.value']
