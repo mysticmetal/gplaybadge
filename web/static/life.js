@@ -40,7 +40,7 @@ $(window).load(function () {
 
         img.fadeIn(1000);
         code.fadeIn(1000);
-        html.val('<a href="' + storeUrl + '"><img src="' + imgSrc + '</a>');
+        html.val('<a href="' + storeUrl + '"><img src="' + imgSrc + '"</a>');
         bbcode.val('[url=' + storeUrl + '][img]' + imgSrc + '[/img][/url]');
         mdown.val('[![Badge](' + imgSrc + ')](' + storeUrl + ')');
 
