@@ -65,7 +65,6 @@ $(window).load(function () {
             return;
         }
         carousel.append('<div> <img data-lazy="' +
-            location.protocol +
             badgePath + '?id=' + app.id +
             '" class="badgeCarouselItem"> </div>')
     });
@@ -150,6 +149,6 @@ var resetUi = function () {
         buildButton.start();
         code.fadeOut(250);
         img.fadeOut(250, function () {
-            img.attr('src', location.protocol + badgePath + '?id=' + packageId);
+            img.attr('src', badgePath + '?id=' + packageId);
         });
     };
