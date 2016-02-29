@@ -4,7 +4,7 @@ use GPlayInfo\HomeController;
 use GuzzleHttp\Client;
 use Monolog\Handler\ErrorLogHandler;
 use Silex\Application;
-use \GPlayInfo\BadgeController;
+use GPlayInfo\BadgeController;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -68,7 +68,7 @@ $app['guzzle_ws'] = $app->share(function () use ($app) {
 //Error handler
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
-        return;
+        return null;
     }
 
     switch ($code) {
