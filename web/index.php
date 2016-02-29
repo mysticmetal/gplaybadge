@@ -76,7 +76,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
             $message = 'We are sorry, but something went terribly wrong.';
     }
 
-    return $app['twig']->render($app['debug'] ? 'error.twig' : 'error.min.twig', ['message' => $message]);
+    return $app['twig']->render('error.twig', ['message' => $message]);
 });
 
 //Routes

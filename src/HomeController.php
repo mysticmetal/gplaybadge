@@ -39,7 +39,7 @@ class HomeController
         shuffle($topApps);
         array_splice($topApps, 5);
 
-        return (new Response($this->app['twig']->render($this->app['debug'] ? 'home.twig' : 'home.min.twig', [
+        return (new Response($this->app['twig']->render('home.twig', [
             'top_apps' => $topApps
         ])))
             ->setExpires(new \DateTime('now +1 day'))
