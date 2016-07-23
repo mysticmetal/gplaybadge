@@ -39,7 +39,7 @@ class BadgeController
      */
     public function badgeAction()
     {
-        $request = $this->app['request'];
+        $request = $this->app['request_stack']->getCurrentRequest();
         $guzzle = $this->app['guzzle_ws'];
         $utc = new \DateTimeZone('UTC');
 
@@ -128,12 +128,12 @@ class BadgeController
             );
 
             try {
-                $appDetail = $guzzle->get('/applicationDetails', [
+                $appDetail = json_decode($guzzle->get('/applicationDetails', [
                     'query' => [
                         'id' => $packageid,
                         'lang' => $lang
                     ]
-                ])->json();
+                ])->getBody()->getContents(), true);
 
                 if (strlen($appDetail['name']) > 33) {
                     $appDetail['name'] = substr($appDetail['name'], 0, 30) . '...';

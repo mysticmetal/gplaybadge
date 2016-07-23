@@ -27,7 +27,7 @@ class HomeController
         $guzzle = $this->app['guzzle_ws'];
 
         try {
-            $topApps = $guzzle->get('/topFreeApps')->json();
+            $topApps = json_decode($guzzle->get('/topFreeApps')->getBody()->getContents(), true);
         } catch (ClientException $e) {
             $this->app['monolog']->addError($e->getMessage());
             $this->app->abort(500);
@@ -53,7 +53,7 @@ class HomeController
         $guzzle = $this->app['guzzle_ws'];
 
         try {
-            $topApps = $guzzle->get('/topFreeApps')->json();
+            $topApps = json_decode($guzzle->get('/topFreeApps')->getBody()->getContents(), true);
         } catch (ClientException $e) {
             $this->app['monolog']->addError($e->getMessage());
             $this->app->abort(500);

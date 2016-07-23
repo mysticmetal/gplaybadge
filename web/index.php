@@ -8,7 +8,7 @@ use GPlayInfo\BadgeController;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
-use Silex\Provider\UrlGeneratorServiceProvider;
+use Silex\Provider\RoutingServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
@@ -30,37 +30,35 @@ $app->register(new MonologServiceProvider(), [
 
 $app->register(new ServiceControllerServiceProvider());
 
-$app->register(new UrlGeneratorServiceProvider());
+$app->register(new RoutingServiceProvider());
 
-$app['security.encoder.digest'] = $app->share(function () {
+$app['security.encoder.digest'] = function () {
     return new MessageDigestPasswordEncoder('sha256', false, 1);
-});
+};
 
 $app['ws.auth.header.name'] = 'X-Mashape-Key';
 $app['ws.auth.header.value'] = getenv('MASHAPE_KEY');
 $app['ws.url'] = 'https://gplaystore.p.mashape.com';
 
-$app['controllers.badge'] = $app->share(function () use ($app) {
+$app['controllers.badge'] = function () use ($app) {
     return new BadgeController($app);
-});
+};
 
-$app['controllers.home'] = $app->share(function () use ($app) {
+$app['controllers.home'] = function () use ($app) {
     return new HomeController($app);
-});
+};
 
-$app['guzzle_ws'] = $app->share(function () use ($app) {
+$app['guzzle_ws'] = function () use ($app) {
     $g = new Client([
-        'base_url' => $app['ws.url'],
-        'defaults' => [
-            'headers' => [
-                'X-Forwarded-For' => $app['request']->getClientIp(),
-                'User-Agent' => $app['request']->headers->get('User-Agent'),
-                $app['ws.auth.header.name'] => $app['ws.auth.header.value']
-            ]
+        'base_uri' => $app['ws.url'],
+        'headers' => [
+            'X-Forwarded-For' => $app['request_stack']->getCurrentRequest()->getClientIp(),
+            'User-Agent' => $app['request_stack']->getCurrentRequest()->headers->get('User-Agent'),
+            $app['ws.auth.header.name'] => $app['ws.auth.header.value']
         ]
     ]);
     return $g;
-});
+};
 
 //Error handler
 $app->error(function (\Exception $e, $code) use ($app) {

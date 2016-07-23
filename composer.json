@@ -3,11 +3,11 @@
     "description": "www.gplay.ws",
     "license": "proprietary",
     "require": {
-        "silex/silex": "~1.2",
-        "guzzlehttp/guzzle": "~4.2.0",
-        "symfony/twig-bridge": "~2.5.0",
+        "silex/silex": "~2.0",
+        "guzzlehttp/guzzle": "~6.0",
+        "symfony/twig-bridge": "~3.1.2",
         "monolog/monolog": "~1.10.0",
-        "intervention/image": "~2.0.0",
+        "intervention/image": "~2.3.7",
         "ext-imagick": "*",
         "ext-gd": "*",
         "php": "^5.6.16"
