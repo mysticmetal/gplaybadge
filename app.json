@@ -1,0 +1,11 @@
+{
+  "name": "gplay.ws",
+  "website": "https://github.com/maxcanna/gplaybadge",
+  "repository": "https://github.com/maxcanna/gplaybadge",
+  "description": "Easily create a badge to promote your own android application in a single step!",
+  "image": "heroku/php",
+  "success_url": "/",
+  "addons": [
+    "newrelic"
+  ]
+}

@@ -14,3 +14,7 @@ This git repo hosts all the source code of [gplay.ws](http://gplay.ws)
 * Install project dependencies via ```php composer.phar install```
 * Test locally via ``` php -S 0.0.0.0:3000 -t web/ ```
 * Deploy wherever you like
+
+Alternatively, you can create an Heroku application
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
