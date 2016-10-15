@@ -2,9 +2,11 @@
  * Created by massimilianocannarozzo on 21/06/14.
  */
 
+/* globals $, Clipboard, ga */
+/* eslint-env browser */
 var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton, startTime;
 
-$(window).load(function () {
+$(function () {
     code = $('#badgeCode');
     packageIdInput = $('#packageIdInput');
     html = $('#html');
@@ -17,7 +19,7 @@ $(window).load(function () {
         event.preventDefault();
         buildButton = Ladda.create(this);
         if (packageId) {
-            if (imgSrc == null || img.attr('src').indexOf(packageId) < 0) {
+            if (imgSrc === null || img.attr('src') === undefined || img.attr('src').indexOf(packageId) < 0) {
                 resetUi();
                 startTime = new Date().getTime();
                 fetchBadge(packageId);
@@ -61,7 +63,7 @@ $(window).load(function () {
     const carousel = $('#badgeCarousel');
 
     topApps.forEach(function (app, index) {
-        if (index == 0) {
+        if (index === 0) {
             return;
         }
         carousel.append('<div> <img data-lazy="' +
@@ -97,7 +99,7 @@ $(window).load(function () {
 
 });
 
-var resetUi = function () {
+const resetUi = function () {
         packageIdInput.attr('disabled', false);
         buildButton.stop();
     }
