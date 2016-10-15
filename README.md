@@ -1,6 +1,6 @@
-# gplaybadge ![](https://codeship.com/projects/aae89ac0-af0d-0133-5e4c-6624307c89c5/status?branch=master)
+# gplaybadge ![](https://img.shields.io/codeship/4b5860b0-7521-0134-3653-1eaf12e437c5.svg)
 
-Easily create a badge to promote your own android application in a single step. [Demo](http://gplay.ws)
+Easily create a badge to promote your own android application in a single step. [Demo](http://gplay.ws).
 
 ## How do I get set up?
 
