@@ -101,7 +101,7 @@
                 <div class="input-group">
                     <input onclick="this.select();" type="text" class="form-control material" id="html">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" id="copy-html" type="button">Copy</button>
+                    <button class="btn btn-primary" id="copy-html" type="button" data-clipboard-target="#html">Copy</button>
                 </span>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="input-group">
                     <input onclick="this.select();" type="text" class="form-control material" id="bbcode">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" id="copy-bbcode" type="button">Copy</button>
+                    <button class="btn btn-primary" id="copy-bbcode" type="button" data-clipboard-target="#bbcode">Copy</button>
                 </span>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 <div class="input-group">
                     <input onclick="this.select();" type="text" class="form-control material" id="mdown">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" id="copy-mdown" type="button">Copy</button>
+                    <button class="btn btn-primary" id="copy-mdown" type="button" data-clipboard-target="#mdown">Copy</button>
                 </span>
                 </div>
             </div>
@@ -207,7 +207,7 @@
                 <a href="https://github.com/hakimel/Ladda" title="Ladda" target="_blank">Ladda</a>,
                 <a href="https://github.com/kenwheeler/slick" title="slick" target="_blank">slick</a>,
                 <a href="https://github.com/ifightcrime/bootstrap-growl" title="Bootstrap Growl" target="_blank">Bootstrap Growl</a> and
-                <a href="http://zeroclipboard.org/" title="ZeroClipboard" target="_blank">ZeroClipboard</a> besides the canonicals
+                <a href="https://clipboardjs.com/" title="clipboard.js" target="_blank">clipboard.js</a> besides the canonicals
                 <a href="https://getbootstrap.com/" title="Bootstrap" target="_blank">Bootstrap</a> and
                 <a href="https://jquery.com/" title="jQuery" target="_blank">jQuery</a>. <br>
                 Many thanks to them for letting me create all of this.
@@ -230,7 +230,7 @@
 <script async src="//cdnjs.cloudflare.com/ajax/libs/ladda-bootstrap/0.9.4/ladda.min.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
 <script async src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-<script async src="//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.min.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
 <script async src="{{ path('home') }}static/life.js"></script>
 </body>
 </html>
