@@ -15,4 +15,6 @@ Or manually:
 * Test locally via ``` php -S 0.0.0.0:3000 -t web/ ```
 * Deploy wherever you like
 
-In either case remember to set `MASHAPE_KEY` env var to your [GPlay API key](https://api.gplay.ws/)
+In either case remember to set these two env vars:
+* `MASHAPE_KEY` to your [GPlay API key](https://api.gplay.ws/)
+* `UA` to your [Google Analytics Tracking ID](https://api.gplay.ws/)

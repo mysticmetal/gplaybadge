@@ -40,7 +40,8 @@ class HomeController
         array_splice($topApps, 5);
 
         return (new Response($this->app['twig']->render('home.twig', [
-            'top_apps' => $topApps
+            'top_apps' => $topApps,
+            'ua' => getenv('UA'),
         ])))
             ->setExpires(new \DateTime('now +1 day'))
             ->setMaxAge(24 * 60 * 60)
