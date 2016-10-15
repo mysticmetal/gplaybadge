@@ -2,9 +2,11 @@
  * Created by massimilianocannarozzo on 21/06/14.
  */
 
+/* globals $, Clipboard, ga */
+/* eslint-env browser */
 var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton, startTime;
 
-$(window).load(function () {
+$(function () {
     code = $('#badgeCode');
     packageIdInput = $('#packageIdInput');
     html = $('#html');
@@ -17,7 +19,7 @@ $(window).load(function () {
         event.preventDefault();
         buildButton = Ladda.create(this);
         if (packageId) {
-            if (imgSrc == null || img.attr('src').indexOf(packageId) < 0) {
+            if (imgSrc === null || img.attr('src') === undefined || img.attr('src').indexOf(packageId) < 0) {
                 resetUi();
                 startTime = new Date().getTime();
                 fetchBadge(packageId);
@@ -61,7 +63,7 @@ $(window).load(function () {
     const carousel = $('#badgeCarousel');
 
     topApps.forEach(function (app, index) {
-        if (index == 0) {
+        if (index === 0) {
             return;
         }
         carousel.append('<div> <img data-lazy="' +
@@ -85,36 +87,9 @@ $(window).load(function () {
         autoplaySpeed: 7000
     });
 
-    const afterCopy = function () {
-        showMessage('Code copied to clipboard, paste, paste, paste!', false);
-    };
-
-    const clipHtml = new ZeroClipboard($('#copy-html'));
-    clipHtml.on("beforecopy", function () {
-        ga('send', 'event', 'code', 'copy', 'html');
-        this.setText(html.val());
-    });
-    clipHtml.on("aftercopy", afterCopy);
-
-    const clipBB = new ZeroClipboard($('#copy-bbcode'));
-    clipBB.on("beforecopy", function () {
-        ga('send', 'event', 'code', 'copy', 'bbcode');
-        this.setText(bbcode.val());
-    });
-    clipBB.on("aftercopy", afterCopy);
-
-    const clipMD = new ZeroClipboard($('#copy-mdown'));
-    clipMD.on("beforecopy", function () {
-        ga('send', 'event', 'code', 'copy', 'mdown');
-        this.setText(mdown.val());
-    });
-    clipMD.on("aftercopy", afterCopy);
-
-    ZeroClipboard.on("error", function() {
-        ga('send', 'event', 'code', 'copy', 'error');
-        code.find('.input-group').removeClass();
-        code.find('.input-group-btn').remove();
-    });
+    bindButton('html');
+    bindButton('bbcode');
+    bindButton('mdown');
 
     $('.modal').on('shown.bs.modal', function () {
         ga('send', 'event', 'modal', 'shown', this.id);
@@ -124,7 +99,7 @@ $(window).load(function () {
 
 });
 
-var resetUi = function () {
+const resetUi = function () {
         packageIdInput.attr('disabled', false);
         buildButton.stop();
     }
@@ -143,6 +118,22 @@ var resetUi = function () {
             allow_dismiss: false,
             stackup_spacing: 10
         });
+    }
+    , afterCopy = function () {
+        showMessage('Code copied to clipboard, paste, paste, paste!', false);
+    }
+    , copyError = function() {
+        ga('send', 'event', 'code', 'copy', 'error');
+        code.find('.input-group').removeClass();
+        code.find('.input-group-btn').remove();
+    }
+    , bindButton = function (buttonId) {
+        (new Clipboard('#copy-' + buttonId))
+            .on('beforecopy', function () {
+                ga('send', 'event', 'code', 'copy', buttonId);
+            })
+            .on('success', afterCopy)
+            .on('error', copyError);
     }
     , fetchBadge = function (packageId) {
         packageIdInput.attr('disabled', true);
