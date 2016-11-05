@@ -17,4 +17,4 @@ Or manually:
 
 In either case remember to set these two env vars:
 * `MASHAPE_KEY` to your [GPlay API key](https://api.gplay.ws/)
-* `UA` to your [Google Analytics Tracking ID](https://api.gplay.ws/)
+* `UA` to your [Google Analytics Tracking ID](https://support.google.com/analytics/answer/1032385)
