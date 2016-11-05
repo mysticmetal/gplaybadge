@@ -20,8 +20,8 @@ const FONT_SIZE_FIELD = 14;
 const FONT_SIZE_WATERMARK = 9;
 const ICON_SIZE = 64;
 const MARGIN = 10;
-const FONT_FILE_PATH = __DIR__ . '/../res/fonts/Roboto-Regular.ttf';
-const BACKGROUND_FILE_PATH = __DIR__ . '/../res/images/badge_bg.png';
+const FONT_FILE_PATH = __DIR__ . '/../../res/fonts/Roboto-Regular.ttf';
+const BACKGROUND_FILE_PATH = __DIR__ . '/../../res/images/badge_bg.png';
 
 class BadgeGenerator
 {
@@ -102,9 +102,9 @@ class BadgeGenerator
             $appDetail['rating']['display'] . "/5.0 " .
             "(" . number_format($appDetail['rating']['count']) . " ratings)\n" .
             $appDetail['numDownloads'] . " downloads\n" .
-            "Last updated " . strtolower($appDetail['datePublished']),
+            "Last updated on" . strtolower($appDetail['datePublished']),
             ICON_SIZE + 2 * MARGIN,
-            40,
+            20,
             $this->textStyleField
         );
 
