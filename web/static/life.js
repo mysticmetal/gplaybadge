@@ -2,7 +2,7 @@
  * Created by massimilianocannarozzo on 21/06/14.
  */
 
-/* globals $, Clipboard, ga */
+/* globals $, Clipboard, ga, Ladda, topApps, badgePath */
 /* eslint-env browser */
 var imgSrc, img, code, packageIdInput, html, bbcode, mdown, buildButton, startTime;
 
@@ -82,9 +82,9 @@ $(function () {
         touchMove: false,
         accessibility: false,
         onAfterChange: function (slide, index) {
-            $('link[rel="shortcut icon"]').attr('href', topApps[index]['image']);
+            $('link[rel="shortcut icon"]').attr('href', topApps[index].image);
         },
-        autoplaySpeed: 7000
+        autoplaySpeed: 7000,
     });
 
     bindButton('html');
@@ -116,7 +116,7 @@ const resetUi = function () {
             width: 'auto',
             delay: 4000,
             allow_dismiss: false,
-            stackup_spacing: 10
+            stackup_spacing: 10,
         });
     }
     , afterCopy = function () {

@@ -5,7 +5,7 @@
  * Time: 20:29
  */
 
-namespace GPlayInfo;
+namespace GPlayInfo\Controller;
 
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -24,7 +24,7 @@ class HomeController
     public function homeAction()
     {
         $topApps = [];
-        $guzzle = $this->app['guzzle_ws'];
+        $guzzle = $this->app['service.guzzle'];
 
         try {
             $topApps = json_decode($guzzle->get('/topFreeApps')->getBody()->getContents(), true);
@@ -46,25 +46,5 @@ class HomeController
             ->setExpires(new \DateTime('now +1 day'))
             ->setMaxAge(24 * 60 * 60)
             ->setSharedMaxAge(24 * 60 * 60);
-    }
-
-    public function faviconAction()
-    {
-        $topApps = [];
-        $guzzle = $this->app['guzzle_ws'];
-
-        try {
-            $topApps = json_decode($guzzle->get('/topFreeApps')->getBody()->getContents(), true);
-        } catch (ClientException $e) {
-            $this->app['monolog']->addError($e->getMessage());
-            $this->app->abort(500);
-        } catch (RequestException $e) {
-            $this->app['monolog']->addError($e->getMessage());
-            $this->app->abort(500);
-        }
-
-        shuffle($topApps);
-
-        return $this->app->redirect($topApps[0]['image']);
     }
 }

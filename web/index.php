@@ -1,16 +1,18 @@
 <?php
 
-use GPlayInfo\HomeController;
+use GPlayInfo\Controller\FaviconController;
+use GPlayInfo\Controller\HomeController;
+use GPlayInfo\Service\BadgeGenerator;
+use GPlayInfo\Service\DataFetcher;
 use GuzzleHttp\Client;
 use Monolog\Handler\ErrorLogHandler;
 use Silex\Application;
-use GPlayInfo\BadgeController;
+use GPlayInfo\Controller\BadgeController;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\RoutingServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -32,10 +34,6 @@ $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new RoutingServiceProvider());
 
-$app['security.encoder.digest'] = function () {
-    return new MessageDigestPasswordEncoder('sha256', false, 1);
-};
-
 $app['ws.auth.header.name'] = 'X-Mashape-Key';
 $app['ws.auth.header.value'] = getenv('MASHAPE_KEY');
 $app['ws.url'] = 'https://gplaystore.p.mashape.com';
@@ -48,7 +46,19 @@ $app['controllers.home'] = function () use ($app) {
     return new HomeController($app);
 };
 
-$app['guzzle_ws'] = function () use ($app) {
+$app['controllers.favicon'] = function () use ($app) {
+    return new FaviconController($app);
+};
+
+$app['service.generator'] = function () use ($app) {
+    return new BadgeGenerator($app);
+};
+
+$app['service.fetcher'] = function () use ($app) {
+    return new DataFetcher($app);
+};
+
+$app['service.guzzle'] = function () use ($app) {
     $g = new Client([
         'base_uri' => $app['ws.url'],
         'headers' => [
@@ -85,8 +95,8 @@ $app->get('/badge/', 'controllers.badge:badgeAction')
     ->assert('lang', '[a-z]{2}')
     ->bind('badge');
 
-$app->get('/favicon.ico', 'controllers.home:faviconAction');
-$app->get('/apple-touch-icon{modifier}.png', 'controllers.home:faviconAction')
+$app->get('/favicon.ico', 'controllers.favicon:faviconAction');
+$app->get('/apple-touch-icon{modifier}.png', 'controllers.favicon:faviconAction')
     ->assert('modifier', '(-.*)*');
 
 //Enable heroku reverse proxy

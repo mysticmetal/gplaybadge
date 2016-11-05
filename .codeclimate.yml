@@ -13,9 +13,8 @@ engines:
     enabled: true
   phpmd:
     enabled: true
-  phan:
-    enabled: true
 ratings:
     paths:
-    - "*.php"
-    - "*.js"
+    - "web/index.php"
+    - "src/**/*.php"
+    - "web/**/*.js"

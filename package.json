@@ -1,0 +1,23 @@
+{
+  "name": "gplaybadge",
+  "version": "1.0.0",
+  "description": "Easily create a badge to promote your own android application in a single step",
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "node_modules/.bin/eslint .",
+    "postinstall": "npm prune"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxcanna/gplaybadge.git"
+  },
+  "author": "Massimiliano Cannarozzo <massi@massi.ws>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/maxcanna/gplaybadge/issues"
+  },
+  "homepage": "https://github.com/maxcanna/gplaybadge#readme",
+  "devDependencies": {
+    "eslint": "^3.9.1"
+  }
+}
