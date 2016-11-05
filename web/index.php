@@ -1,10 +1,13 @@
 <?php
 
-use GPlayInfo\HomeController;
+use GPlayInfo\Controller\FaviconController;
+use GPlayInfo\Controller\HomeController;
+use GPlayInfo\Service\BadgeGenerator;
+use GPlayInfo\Service\DataFetcher;
 use GuzzleHttp\Client;
 use Monolog\Handler\ErrorLogHandler;
 use Silex\Application;
-use GPlayInfo\BadgeController;
+use GPlayInfo\Controller\BadgeController;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
