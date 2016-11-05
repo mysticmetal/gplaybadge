@@ -13,7 +13,6 @@ use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\RoutingServiceProvider;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -34,10 +33,6 @@ $app->register(new MonologServiceProvider(), [
 $app->register(new ServiceControllerServiceProvider());
 
 $app->register(new RoutingServiceProvider());
-
-$app['security.encoder.digest'] = function () {
-    return new MessageDigestPasswordEncoder('sha256', false, 1);
-};
 
 $app['ws.auth.header.name'] = 'X-Mashape-Key';
 $app['ws.auth.header.value'] = getenv('MASHAPE_KEY');
