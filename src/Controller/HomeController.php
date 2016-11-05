@@ -24,7 +24,7 @@ class HomeController
     public function homeAction()
     {
         $topApps = [];
-        $guzzle = $this->app['guzzle_ws'];
+        $guzzle = $this->app['service.guzzle'];
 
         try {
             $topApps = json_decode($guzzle->get('/topFreeApps')->getBody()->getContents(), true);

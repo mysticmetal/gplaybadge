@@ -48,7 +48,19 @@ $app['controllers.home'] = function () use ($app) {
     return new HomeController($app);
 };
 
-$app['guzzle_ws'] = function () use ($app) {
+$app['controllers.favicon'] = function () use ($app) {
+    return new FaviconController($app);
+};
+
+$app['service.generator'] = function () use ($app) {
+    return new BadgeGenerator($app);
+};
+
+$app['service.fetcher'] = function () use ($app) {
+    return new DataFetcher($app);
+};
+
+$app['service.guzzle'] = function () use ($app) {
     $g = new Client([
         'base_uri' => $app['ws.url'],
         'headers' => [
